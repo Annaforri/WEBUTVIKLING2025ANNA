@@ -25,6 +25,8 @@ body{
                              "main" 
                              "aside" 
                              "footer";
+    gap: 1rem; /* HVA: Gir luft mellom seksjonene for bedre visuell separasjon */
+    max-width: 600px;
 }
 /* ========== GLOBAL HEADER ========== */
 #global-header{
