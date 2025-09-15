@@ -18,13 +18,21 @@ body{
     margin:0; /* HVA: Fjerner standard nettlesermargin for å få mer kontroll over layout */
 }
 
-
+#page-container{
+    display:grid;
+    grid-template-areas: "header" 
+                            "hero"
+                             "main" 
+                             "aside" 
+                             "footer";
+}
 /* ========== GLOBAL HEADER ========== */
 #global-header{
     display: flex;                    /* HVA: Bruker flexbox for fleksibel layout */
     justify-content: space-between;   /* HVA: Plasserer logo til venstre og navigasjon til høyre */
     align-items: center;              /* HVA: Vertikal sentrering av innholdet */
-    padding: 1rem;                    /* HVA: Luft rundt headeren for bedre balanse */
+    padding: 1rem;   
+    grid-area: "header";                 /* HVA: Luft rundt headeren for bedre balanse */
 
     nav{
         ul{
@@ -77,6 +85,7 @@ a{
     position: relative;
     height: 50vh;
     min-height: 200px;
+    grid-area: hero;
     /*
     img{
         width: 100%;
@@ -104,6 +113,7 @@ main{
     max-width: 1200px;
     width: 100%;
     margin: 0 auto;
+    grid-area: main;
 }
 
 /*
@@ -148,6 +158,7 @@ article{
 .side-container{
     background-color: var(--basic-grey);
     padding: 1rem;
+    grid-area: aside;
 
     form{
 
@@ -156,5 +167,30 @@ article{
             padding: 1rem;
             margin: 0.4rem 0;
         }
+    }
+}
+        }
+    }
+}
+
+.age-check{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+footer{
+    background-color: #212324;
+    color: #fff;
+    padding: 1rem;
+    min-height: 150px;
+    grid-area: footer;
+}
+@media only screen and (min-width: 600px){
+    #page-container{
+        grid-template-areas: "header header header"
+                             "hero hero hero"
+                             "main main aside"
+                             "footer footer footer";
     }
 }
