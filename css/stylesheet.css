@@ -1,182 +1,160 @@
-/* Grunnleggende reset og tilgjengelighet */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+:root{
+    /* 
+      Globale CSS-variabler for enkel gjenbruk av farger.
+      HVORFOR: Gir konsistent fargepalett og enklere vedlikehold.
+    */
+    --basic-grey: #efefefef;   /* Lys grå, brukes til bakgrunn og subtile elementer */
+    --basic-red: #6a0404;      /* Mørk rød, kan brukes for viktige knapper/markeringer */
 }
 
-html {
-  font-size: 100%;
-  scroll-behavior: smooth;
+
+/* 
+  GLOBALT: Setter en lesbar standardfont for hele dokumentet.
+  HVORFOR: Sans-serif (Arial/Helvetica) gir god skjermlesbarhet og
+  skaper et ensartet uttrykk på tvers av sider.
+*/
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    margin:0; /* HVA: Fjerner standard nettlesermargin for å få mer kontroll over layout */
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: #222;
-  background: #f9f9f9;
-  line-height: 1.6;
+
+/* ========== GLOBAL HEADER ========== */
+#global-header{
+    display: flex;                    /* HVA: Bruker flexbox for fleksibel layout */
+    justify-content: space-between;   /* HVA: Plasserer logo til venstre og navigasjon til høyre */
+    align-items: center;              /* HVA: Vertikal sentrering av innholdet */
+    padding: 1rem;                    /* HVA: Luft rundt headeren for bedre balanse */
+
+    nav{
+        ul{
+            padding:0;                /* HVA: Fjerner standard padding for renere design */
+            margin:0;                 /* HVA: Fjerner standard marger */
+
+            li{
+                list-style: none;     /* HVA: Skjuler standard punkter i navigasjonslisten */
+                display: inline-block;/* HVA: Viser menyvalg horisontalt i stedet for vertikalt */
+            }
+        }
+    }
 }
 
-/* Header og navigasjon */
-header {
-  background: #006b6b;
-  color: #fff;
-  padding: 1rem 0;
+
+/*
+  #mainlogo: Stil for hovedlogoen/merkenavnet som lenke.
+  HVORFOR: Større og tyngre typografi gjør logoen tydelig; 
+  fjerner understrek for et renere header-uttrykk; 
+  fargevalg i grått (#4d4a4a) gir mykere kontrast enn helt svart.
+*/
+#mainlogo{
+    font-size: 30px;            /* HVA: Stor skrift for visuell hierarki. */
+    font-weight: 900;           /* HVA: Ekstra fet for å signalisere merke/primærsmerke. */
+    font-family: Arial, Helvetica, sans-serif; /* HVA: Sikrer samme font som globalt, og fallback. */
+    text-decoration: none;      /* HVA: Fjerner understrek siden dette fungerer som logo. */
+    color: #4d4a4a;             /* HVA: Dempet grå for mindre hard kontrast enn #000. */
 }
 
-#mainlogo {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 1px;
+
+/*
+  a: Standardstil for lenker.
+  HVORFOR: Fjerner understrek og setter nøytral farge; 
+  dette gir et minimalistisk uttrykk. (Vurder :hover/:focus for tydelig interaksjon.)
+*/
+a{
+    color: #000;                /* HVA: Nøytral svart som standard lenkefarge. */
+    text-decoration: none;      /* HVA: Fjerner understrek for renere typografi. */
 }
 
-nav ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  gap: 1.5rem;
-  justify-content: flex-end;
+
+/* HERO-section */
+.deal-section{
+    background-image: url("https://picsum.photos/800/500?grayscale");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+    background-color:var(--basic-grey); /* HVA: Setter lys bakgrunn for å fremheve seksjonen */
+    padding: 1rem;/* HVA: Gir luft rundt innholdet */
+    position: relative;
+    height: 50vh;
+    min-height: 200px;
+    /*
+    img{
+        width: 100%;
+    }
+
+    h2, p, a{
+        position: absolute;
+    }
+
+    p{
+        top: 63px;
+    }
+
+    a{
+        top: 160px;
+    }
+        */
+
 }
 
-nav a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
+
+/* ========== HOVEDINNHOLD ========== */
+
+main{
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
 }
 
-nav a:hover,
-nav a:focus {
-  color: #ffd700;
+/*
+  article: Kort/innholdsboks-oppsett.
+  HVORFOR: Marg og padding gir luft; subtil kantlinje definerer kort;
+  breddebegrensninger forbedrer lesbarhet og responsivitet.
+*/
+article{
+    margin: 1rem 0;             /* HVA: Vertikal luft mellom artikler. */
+    border: 1px solid #efefef;  /* HVA: Lys kant for visuell avgrensing uten å dominere. */
+    max-width: 400px;           /* HVA: Hindrer for brede linjer – bedre lesbarhet. */
+    width: 100%;                /* HVA: Lar boksen fylle tilgjengelig plass i små visninger. */
+    min-width: 250px;           /* HVA: Sikrer at kortet ikke blir for smalt. */
+    padding: 1rem;              /* HVA: Innvendig luft for behagelig innholdsmarg. */
+
+    /*
+      img (nestet): Gjør bilder responsive inne i article.
+      HVORFOR: Full bredde sikrer at bilder skalerer med boksen og ikke flyter utenfor.
+      
+      OBS: Dette er CSS-nesting. For maksimal kompatibilitet i ren CSS,
+      skriv regelen som `article img { width: 100%; }`.
+    */
+    img{
+        width: 100%;            /* HVA: Skalerer bilde til kortets bredde. */
+    }
 }
 
-/* Hovedinnhold */
-main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 0 1rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+
+/*
+  .btn: Primær knapp/lenke med knappestil.
+  HVORFOR: Kontraststerk bakgrunn for tydelig call-to-action; 
+  inline-block lar oss bruke padding og holde elementet på tekstlinje hvis ønsket.
+*/
+.btn{
+    display: inline-block;      /* HVA: Tillater padding/bredde, men flyter i tekst. */
+    background-color: #000;     /* HVA: Mørk bakgrunn gir klar kontrast mot hvit tekst. */
+    color: #fff;                /* HVA: Høy kontrast for tilgjengelighet/lesbarhet. */
+    padding: 1rem;              /* HVA: Stor klikkflate og balansert spacing */
+    border: none;               /* HVA: Fjerner standardkant for renere uttrykk */
 }
 
-h1, h2, h3 {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  color: #006b6b;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
+.side-container{
+    background-color: var(--basic-grey);
+    padding: 1rem;
 
-h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-}
+    form{
 
-h2 {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-h3 {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-section {
-  margin-bottom: 2rem;
-}
-
-ul, ol {
-  padding-left: 1.5rem;
-}
-
-li {
-  margin-bottom: 0.5rem;
-}
-
-blockquote {
-  background: #e6f7f7;
-  border-left: 4px solid #006b6b;
-  margin: 1rem 0;
-  padding: 1rem;
-  font-style: italic;
-  color: #333;
-}
-
-cite {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-details summary {
-  cursor: pointer;
-  font-weight: 600;
-  color: #006b6b;
-}
-
-details[open] summary {
-  color: #004d4d;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  border-radius: 6px;
-  margin-top: 1rem;
-}
-
-/* Footer */
-footer {
-  background: #004d4d;
-  color: #fff;
-  text-align: center;
-  padding: 2rem 1rem 1rem 1rem;
-  margin-top: 3rem;
-  font-size: 1rem;
-  border-top: 4px solid #006b6b;
-}
-
-footer a {
-  color: #ffd700;
-  text-decoration: underline;
-  margin: 0 0.3rem;
-}
-
-footer a:hover,
-footer a:focus {
-  color: #fff;
-  text-decoration: none;
-}
-
-/* Responsiv design */
-@media (max-width: 700px) {
-  nav ul {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-  main {
-    padding: 0.5rem;
-  }
-  h1 {
-    font-size: 1.5rem;
-  }
-}
-
-/* SEO og tilgjengelighet */
-a:focus {
-  outline: 2px solid #ffd700;
-  outline-offset: 2px;
-}
-
-summary:focus {
-  outline: 2px solid #ffd700;
-  outline-offset: 2px;
+        input{
+            display: block;
+            padding: 1rem;
+            margin: 0.4rem 0;
+        }
+    }
 }
