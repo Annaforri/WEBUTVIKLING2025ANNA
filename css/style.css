@@ -1,158 +1,179 @@
-/* ========================
-   Global stil
-======================== */
-:root {
-  box-sizing: border-box;
-
+/* === GLOBALT ================================ */
+* { 
+    box-sizing: border-box; /*HVA: Inkluderer padding/border i bredde/høyde. HVORFOR: Mer forutsigbar layout. */
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  background: #121212;       /* mørk bakgrunn som Guilty */
-  color: #f5f5f5;            /* lys tekst */
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.6;
+html, body{
+    margin: 0; /*Fjerner standard-margin*/
+    padding: 0; /*Fjerner standard-padding*/
+    background-color: #111111; /*Bakgrunn: nesten sort*/
+    color: #f5f5f5; /*Tekst: lys grå for god kontrast*/
+    font-family: 'Arial', sans-serif; /*Skrifttype*/
+    line-height: 1.6; /*Bedre lesbarhet*/
 }
 
-a {
-  color: #77d9a0;           /* aksentfarge (lys grønn) */
-  text-decoration: none;
+/* Standard lenker */
+a{
+    color: #ed8a58; /*Lysegrønn lenkefarge*/
+    text-decoration: none; /*Fjerner understrek*/
 }
-a:hover {
-  color: #ffffff;
-}
-
-/* HEADER */
-.site-header {
-  background: #1e1e1e;       /* litt lysere mørk grå for header */
-  padding: 1rem;
-  border-bottom: 1px solid #333333;
+a:hover{
+    color: #f4a261; /*Lys oransje ved hover (ønsket)*/
 }
 
-.logo {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  color: #f5f5f5;
+/* === HEADER ================================ */
+header {
+    display: flex; /*Aktiverer flexbox*/
+    justify-content: space-between; /*Plasserer elementer fra hverandre*/
+    align-items: center; /*Sentrerer vertikalt*/
+    background-color: #000000; /*Mørk header-bakgrunn*/
+    color: #ffffff; /*Tekstfarge i header*/
+    padding: 12px 16px; /*Avstand rundt innhold*/
+    margin: 0; /*Fjerner margin rundt header*/
+    border-bottom: 1px solid #333333; /*Tynn skillelinje*/
+    font-size: 15px; /*Tekststørrelse*/
+    font-weight: bold; /*Fet tekst*/
 }
 
-/* NAVIGASJON */
-.main-nav {
-  background: #121212;       /* uniform bakgrunn */
-  border: 1px solid #333333;
-  border-radius: 8px;
-  margin-top: 1rem;
+/* Logo/overskrift i header */
+header h3{
+    margin: 0; /*Fjerner ekstra luft*/
+    font-size: 1rem; /*Tilpasset størrelse*/
+    letter-spacing: 0.06em; /*Litt bokstavluft*/
 }
-.nav-list {
-  list-style: none;
-  display: flex;
-  margin: 0;
-  padding: 0;
-}
-.nav-list li a {
-  display: block;
-  padding: .85rem 1rem;
-  border-right: 1px solid #333333;
-}
-.nav-list li:last-child a {
-  border-right: none;
-}
-.nav-list li a:hover {
-  background: #77d9a0;
-  color: #121212;
+header h3 a{
+    color: #e8decf; /*Beige logo/lenke*/
 }
 
-/* MAIN + ARTIKLER */
-.page {
-  padding: 1rem;
+/* Navigasjon i header */
+nav ul{
+    list-style: none; /*Fjerner punktmerking*/
+    margin: 0; /*Null margin*/
+    padding: 6px 0; /*Litt luft opp/ned*/
+    display: flex; /*Vannrett meny*/
+    gap: 20px; /*Mellomrom mellom punkter*/
+}
+nav ul li a{
+    color: #ffffff; /*Hvit tekst i menyen*/
+    font-size: 15px; /*Tekststørrelse*/
+    font-weight: bold; /*Fet*/
+    padding: 10px; /*Klikkeflate*/
+    border-radius: 8px; /*Myke hjørner for hover-bakgrunn*/
+}
+nav ul li a:hover{
+    background-color: hsla(25, 96%, 50%, 0.23); /*lilla bakgrunn ved hover*/
+    color: #f8f0ea; /*Beige tekst ved hover*/
+    transition: background-color 0.15s ease, color 0.15s ease; /*Myk overgang*/
 }
 
-.section-header {
-  margin: 0 0 .75rem 0;
-  padding-bottom: .25rem;
-  border-bottom: 1px solid #333333;
+/* === MAIN (artikler i "designede bokser") === */
+main{
+    padding: 16px; /*Luft rundt hovedinnhold*/
 }
 
-.card {
-  background: #1e1e1e;
-  border: 1px solid #333333;
-  border-radius: 10px;
-  padding: 1.25rem;
-  margin: 1.25rem 0;
+/* Kortboks-stil for artikler (EN LITEN KLASSE – gjenbrukbar) */
+.card{
+    background-color: #020202; /*Mørk grå boks*/
+    border: 2px solid #ff7b00e0; /*Litt lysere grå kant*/
+    border-radius: 12px; /*Runde hjørner*/
+    padding: 20px; /*Luft inni*/
+    margin: 10px 0; /*Luft utenfor*/
+    box-shadow: 0 8px 24px rgba(0,0,0,.12); /*Subtil skygge*/
 }
-.card h2 {
-  margin-top: 0;
-  color: #77d9a0;
-}
-
-/* SIDEBAR */
-.sidebar {
-  background: #1e1e1e;
-  border: 1px solid #333333;
-  border-radius: 10px;
-  padding: 1.25rem;
-}
-.sidebar h3 {
-  color: #77d9a0;
-}
-.sidebar a {
-  color: #f5f5f5;
-}
-.sidebar a:hover {
-  color: #77d9a0;
+.card h2{
+    margin-top: 0; /*Fjerner topp-luft*/
+    color: #fa7a25; /*Lysegrønn tittel i boks*/
 }
 
-/* FOOTER */
-.site-footer {
-  background: #121212;
-  color: #f5f5f5;
-  padding: 1rem;
-  border-top: 1px solid #333333;
+/* Lenker inni artikler */
+article a{
+    color: #ff7b00e0; /*mørk lilla lenke*/
+}
+article a:hover{
+    color: #ffa45a; /*Lys oransje ved hover*/
 }
 
-.contact-form {
-  display: grid;
-  gap: .75rem;
-  margin-top: .75rem;
-  max-width: 600px;
+/* Seksjons-header inne i main (bruker type, ikke klasse) */
+main > header{
+    border-bottom: 2px solid #fd6a00; /*Diskret linje*/
+    margin: 0 0 12px 0; /*Luft under*/
+    padding-bottom: 6px; /*Litt padding under tekst*/
 }
 
-.form-field label {
-  font-weight: bold;
-  color: #bbbbbb;
+/* === ASIDE (kontrast mot resten) ============ */
+aside{
+    background-color: #ffad7a; /*Beige kontrastboks (ønsket kontrast)*/
+    color: #000000; /*Mørk tekst for lesbarhet på beige*/
+    border: 1px solid #fe6a00; /*Lysere beige kant*/
+    border-radius: 12px; /*Runde hjørner*/
+    padding: 20px; /*Luft inni*/
+    margin: 16px; /*Luft utenfor*/
+}
+aside h3{
+    color: #000000; /*Militærgrønn tittel i aside*/
+    margin-top: 0; /*Null topp-luft*/
+}
+aside a{
+    color: #111111; /*Mørke lenker i lys boks*/
+    text-decoration: underline; /*Tydelig lenke på lys bakgrunn*/
+}
+aside a:hover{
+    color: #a34900; /*Lys oransje ved hover (konsekvent)*/
 }
 
-.input,
-.textarea {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid #333333;
-  border-radius: 8px;
-  background: #1e1e1e;
-  color: #f5f5f5;
-}
-.textarea {
-  min-height: 120px;
-  resize: vertical;
+/* === FOOTER (mørk) ========================= */
+footer{
+    background-color: #000000; /*Mørk footer-bakgrunn*/
+    color: #ffffff; /*Hvit tekst*/
+    padding: 10
+    px; /*Luft inni*/
+    border-top: 1px solid #333333; /*Skillelinje mot innholdet*/
 }
 
-/* KNAPPER */
-.btn {
-  display: inline-block;
-  padding: .85rem 1.1rem;
-  border-radius: 10px;
-  font-weight: bold;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: all .2s ease;
+/* Skjema i footer – type-selektorer med minst mulig klasser */
+footer form{
+    display: grid; /*Enkel, ryddig layout*/
+    gap: 2px; /*Avstand mellom felt*/
+    max-width: 640px; /*Behagelig bredde*/
 }
-.btn-primary {
-  background: #77d9a0;
-  color: #121212;
-  border: 2px solid #77d9a0;
+footer label{
+    display: block; /*Legger hvert felt på egen linje*/
+    font-weight: bold; /*Tydelige labels*/
+    color: #ffffff; /*Beige labels for subtil kontrast*/
 }
-.btn-primary:hover {
-  background: #5eb888;  /* mørkere grønn hover */
-  color: #f5f5f5;
+footer input[type="text"],
+footer input[type="email"],
+footer textarea{
+    width: 100%; /*Fyller bredden*/
+    padding: 12px; /*Luft inni*/
+    border: 1px solid #4a4a4a; /*Diskret kant*/
+    border-radius: 10px; /*Myke hjørner*/
+    background-color: #3f3f3f; /*Mørk grå felt*/
+    color: #f5f5f5; /*Lys tekst i feltene*/
+}
+footer textarea{
+    min-height: 120px; /*Komfortabelt skrivefelt*/
+    resize: vertical; /*La brukeren justere høyden*/
+}
+
+/* Knapp (EN LITEN KLASSE – styling utover type) */
+.btn{
+    display: inline-block; /*Lar oss styre padding/bredde*/
+    padding: 12px 16px; /*Klikkeflate*/
+    border-radius: 12px; /*Myke hjørner*/
+    font-weight: bold; /*Tydelig knappetekst*/
+    text-transform: uppercase; /*Knappepreg*/
+    cursor: pointer; /*Pekehånd*/
+    background-color: #000000; /*Militærgrønn knapp*/
+    color: #e8decf; /*Beige tekst*/
+    border: 1px solid #ffffff; /*Lysegrønn kant*/
+    transition: background-color .15s ease, color .15s ease, transform .08s ease; /*Myke overganger*/
+}
+.btn:hover{
+    background-color: #ffffffd6; /*Lysegrønn ved hover*/
+    color: #f96400; /*Mørk tekst på lys grønn*/
+    transform: translateY(-1px); /*Litt "løft"*/
+}
+.btn:active{
+    transform: translateY(0); /*Tilbake ved klikk*/
 }

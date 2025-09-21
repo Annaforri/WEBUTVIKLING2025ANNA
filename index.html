@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hovedside - Labøvelse</title> 
-    <link rel="stylesheet" type="text/css" href="css/stylesheet.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
   </head>
   <body>
-    <header>
-      <h3><a href="index.html">LOGO</a></h3>
-      <nav>
+    <header class="site-header">
+      <h3 class="logo"><a href="index.html">LOGO</a></h3>
+      <nav class="main">
         <ul>
-          <li><a href="index.html">hjem</a></li>
-          <li><a href="nettsidemal.html">nettside mal</a></li>
+          <li><a href="index.html">Hjem</a></li>
+          <li><a href="nettsidemal.html">Nettside mal</a></li>
           <li><a href="ovelse.html">Lab øvelser</a></li>
           <li><a href="kontaktoss.html">Kontakt oss</a></li>
         </ul>
@@ -24,11 +24,11 @@
     <h1> Lab øvelse 1</h1>
     </header>
     <section>
-      <article>
+      <article class="card">
         <h2> Kontakt oss</h2>
         <p>Her kan du kontakte oss</p>
       </article>
-    <article>
+    <article class="card">
       <h2>Studieplan</h2>
         <p>Her er studieplanen for webutvikling</p>
         <a href="https://tp.educloud.no/hiof/timeplan/timeplan.php?id%5B%5D=ITF10511%2C1&type=course&sem=25h&campus=&hide_old=1">Link til studieplan</a>
@@ -70,24 +70,24 @@
       <label>Navn:<br>
         <input type="text" name="navn" required>
       </label>
-      <br><br>
+      <br>
 
       <label>Emne:<br>
         <input type="text" name="emne" required>
       </label>
-      <br><br>
+      <br>
 
       <label>E-post:<br>
         <input type="email" name="epost" required>
       </label>
-      <br><br>
+      <br>
 
       <label>Melding:<br>
         <textarea name="melding" rows="5" cols="30" required></textarea>
       </label>
-      <br><br>
+      <br>
 
-      <button type="submit">Send</button>
+      <button type="submit" class="btn">Send</button>
     </form>
   </footer>
   </body>
