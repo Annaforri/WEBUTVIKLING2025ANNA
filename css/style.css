@@ -3,47 +3,45 @@
 ======================== */
 :root {
   box-sizing: border-box;
+
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: #111111;      /* Sort bakgrunn */
-  color: #f5f5f5;           /* Lys grå tekst */
+  background: #121212;       /* mørk bakgrunn som Guilty */
+  color: #f5f5f5;            /* lys tekst */
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.6;
 }
 
-/* Lenker */
 a {
-  color: #a8d5ba;           /* Lysegrønn */
+  color: #77d9a0;           /* aksentfarge (lys grønn) */
   text-decoration: none;
 }
 a:hover {
-  color: #e8decf;           /* Beige ved hover */
+  color: #ffffff;
 }
 
-/* ========================
-   Header
-======================== */
+/* HEADER */
 .site-header {
-  background: #2e2e2e;       /* Mørk grå */
+  background: #1e1e1e;       /* litt lysere mørk grå for header */
   padding: 1rem;
-  border-bottom: 2px solid #556b2f; /* Militærgrønn kant */
+  border-bottom: 1px solid #333333;
 }
 
 .logo {
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #e8decf;            /* Beige logo */
+  letter-spacing: .08em;
+  color: #f5f5f5;
 }
 
-/* Navigasjon */
+/* NAVIGASJON */
 .main-nav {
-  background: #111111;       /* Sort */
-  border: 1px solid #2e2e2e;
-  border-radius: 10px;
+  background: #121212;       /* uniform bakgrunn */
+  border: 1px solid #333333;
+  border-radius: 8px;
   margin-top: 1rem;
 }
 .nav-list {
@@ -54,104 +52,107 @@ a:hover {
 }
 .nav-list li a {
   display: block;
-  padding: 0.85rem 1rem;
-  border-right: 1px solid #2e2e2e;
-  color: #f5f5f5;
+  padding: .85rem 1rem;
+  border-right: 1px solid #333333;
 }
-.nav-list li:last-child a { border-right: none; }
+.nav-list li:last-child a {
+  border-right: none;
+}
 .nav-list li a:hover {
-  background: #556b2f;       /* Militærgrønn hover */
-  color: #e8decf;            /* Beige tekst */
+  background: #77d9a0;
+  color: #121212;
 }
 
-/* ========================
-   Main / Artikler
-======================== */
+/* MAIN + ARTIKLER */
 .page {
   padding: 1rem;
 }
 
+.section-header {
+  margin: 0 0 .75rem 0;
+  padding-bottom: .25rem;
+  border-bottom: 1px solid #333333;
+}
+
 .card {
-  background: #2e2e2e;       /* Mørk grå bakgrunn */
-  border: 1px solid #556b2f; /* Militærgrønn kant */
-  border-radius: 12px;
+  background: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: 10px;
   padding: 1.25rem;
   margin: 1.25rem 0;
 }
 .card h2 {
   margin-top: 0;
-  color: #a8d5ba;           /* Lysegrønn overskrift */
+  color: #77d9a0;
 }
 
-/* ========================
-   Sidebar
-======================== */
+/* SIDEBAR */
 .sidebar {
-  background: #2e2e2e;
-  border: 1px solid #e8decf; /* Beige kant */
-  border-radius: 12px;
+  background: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: 10px;
   padding: 1.25rem;
 }
 .sidebar h3 {
-  color: #a8d5ba;           /* Lysegrønn tittel */
+  color: #77d9a0;
 }
 .sidebar a {
   color: #f5f5f5;
 }
 .sidebar a:hover {
-  color: #e8decf;           /* Beige ved hover */
+  color: #77d9a0;
 }
 
-/* ========================
-   Footer
-======================== */
+/* FOOTER */
 .site-footer {
-  background: #111111;      /* Sort */
+  background: #121212;
   color: #f5f5f5;
   padding: 1rem;
-  border-top: 2px solid #556b2f; /* Militærgrønn kant */
+  border-top: 1px solid #333333;
 }
 
 .contact-form {
   display: grid;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
+  gap: .75rem;
+  margin-top: .75rem;
   max-width: 600px;
 }
 
 .form-field label {
   font-weight: bold;
-  color: #e8decf;           /* Beige labels */
+  color: #bbbbbb;
 }
 
-.input, .textarea {
+.input,
+.textarea {
   width: 100%;
   padding: 1rem;
-  border: 1px solid #2e2e2e;
-  border-radius: 10px;
-  background: #2e2e2e;      /* Mørk grå felt */
+  border: 1px solid #333333;
+  border-radius: 8px;
+  background: #1e1e1e;
   color: #f5f5f5;
 }
-.textarea { min-height: 120px; resize: vertical; }
+.textarea {
+  min-height: 120px;
+  resize: vertical;
+}
 
-/* ========================
-   Knapper
-======================== */
+/* KNAPPER */
 .btn {
   display: inline-block;
-  padding: 0.85rem 1.1rem;
-  border-radius: 12px;
+  padding: .85rem 1.1rem;
+  border-radius: 10px;
   font-weight: bold;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all .2s ease;
 }
 .btn-primary {
-  background: #556b2f;      /* Militærgrønn knapp */
-  color: #e8decf;           /* Beige tekst */
-  border: 2px solid #a8d5ba;
+  background: #77d9a0;
+  color: #121212;
+  border: 2px solid #77d9a0;
 }
 .btn-primary:hover {
-  background: #a8d5ba;      /* Lysegrønn ved hover */
-  color: #111111;           /* Sort tekst */
+  background: #5eb888;  /* mørkere grønn hover */
+  color: #f5f5f5;
 }
