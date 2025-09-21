@@ -1,9 +1,7 @@
 /* ========================
    Global stil
 ======================== */
-*,
-*::before,
-*::after {
+:root {
   box-sizing: border-box;
 }
 
