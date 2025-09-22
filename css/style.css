@@ -3,32 +3,69 @@
     box-sizing: border-box; /*HVA: Inkluderer padding/border i bredde/høyde. HVORFOR: Mer forutsigbar layout. */
 }
 
-/* === GRID LAYOUT ============================= */
-/* Mobil først: alt under hverandre */
+/*=== GRID LAYOUT ============================= */
+/* --- KOMMENTERT UT GRID (beholdt som referanse) ---
 .layout{
     display: grid; /*Aktiverer CSS Grid*/
-    grid-template-columns: 1fr; /*En kolonne på mobil*/
+   /* grid-template-columns: 1fr; /*En kolonne på mobil
     grid-template-areas:
         "header"
         "main"
         "aside"
         "footer"; /*Rekkefølge på mobil*/
-    gap: 16px; /*Avstand mellom seksjoner*/
-    padding: 16px; /*Luft rundt innholdet*/
-}
+   /* gap: 16px; /*Avstand mellom seksjoner*/
+   /* padding: 16px; /*Luft rundt innholdet*/
+/*}
 
-/* Knytt seksjonene til sine områder */
 header { grid-area: header; }
 main   { grid-area: main; }
 aside  { grid-area: aside; }
 footer { grid-area: footer; }
 
 /* Fjern ekstra margin på kort i grid */
-.card{ margin: 0; }
+/*.card{ margin: 0; }
 
 
 /* Header og footer skal stå “for seg selv” (full bredde) – ingen endring trengs,
    men vi gir litt konsistent spacing rundt siden: */
+
+.layout{
+    display: flex;              /*Aktiverer flex*/
+    flex-direction: column;     /*Stabler seksjoner vertikalt*/
+    gap: 16px;                  /*Avstand mellom seksjoner*/
+    padding: 16px;              /*Luft rundt innhold*/
+
+
+}
+@media (min-width: 900px){
+    .content-row{
+        display: flex;              /*Rad med main og aside*/
+        align-items: flex-start;    /*Start topp*/
+        gap: 16px;                  /*Mellomrom mellom main og aside*/
+    }
+
+    .content-row > main{
+        flex: 2 1 0%;              /*Main tar dobbel plass*/
+        min-width: 0;
+    }
+
+    .content-row > aside{
+        flex: 1 0 320px;           /*Sidebar ~320px bred*/
+        max-width: 420px;
+        position: sticky;
+        top: 16px;
+        align-self: flex-start;
+    }
+
+    main > section{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;   /*midtstiller kortene*/
+    }
+    main > section > .card{
+        flex: 1 1 360px;           /*kort ~360px minimum*/
+    }
 header, footer{
     margin: 0; /*Sikrer at de flukter mot kantene – du har allerede padding*/
 }
@@ -231,9 +268,10 @@ footer textarea{
 }
 
 /* === DESKTOP (Mac/PC): tre kolonner main | main | aside */
-    @media (min-width: 900px){
+/* === DESKTOP (Mac/PC) GRID: tre kolonner main | main | aside
+@media (min-width: 900px){
   .layout{
-    grid-template-columns: 1fr 1fr 320px;  /* to brede kolonner + sidebar/*/
+    grid-template-columns: 1fr 1fr 320px;  
     grid-template-areas:
       "header header header"
       "main   main   aside"
@@ -242,21 +280,18 @@ footer textarea{
     align-items: start;
   }
 
-  /* Inni MAIN: gjør kortene til 2 kolonner på stor skjerm/*/
   main > section{
-    display: grid;                 /* aktiver grid i main*/
-    grid-template-columns: 1fr 1fr;/* to kort ved siden av hverandre/*/
-    gap: 16px;                     /* avstand mellom kort */
+    display: grid;                 
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;                     
   }
 
-  /* Fjern margin når kort står i grid (vi bruker gap) */
- main .card{ margin: 0; }
+  main .card{ margin: 0; }
 
-  /* Sticky aside (valgfritt, men kjekt) */
   aside{
     position: sticky;
     top: 16px;
     align-self: start;
   }
-} /*
-/* ← ingen ekstra '}' her! */
+}
+/*--- SLUTT GRID ---------------------------------- */
