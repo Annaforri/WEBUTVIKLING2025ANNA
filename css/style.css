@@ -3,6 +3,36 @@
     box-sizing: border-box; /*HVA: Inkluderer padding/border i bredde/høyde. HVORFOR: Mer forutsigbar layout. */
 }
 
+/* === GRID LAYOUT ============================= */
+/* Mobil først: alt under hverandre */
+.layout{
+    display: grid; /*Aktiverer CSS Grid*/
+    grid-template-columns: 1fr; /*En kolonne på mobil*/
+    grid-template-areas:
+        "header"
+        "main"
+        "aside"
+        "footer"; /*Rekkefølge på mobil*/
+    gap: 16px; /*Avstand mellom seksjoner*/
+    padding: 16px; /*Luft rundt innholdet*/
+}
+
+/* Knytt seksjonene til sine områder */
+header { grid-area: header; }
+main   { grid-area: main; }
+aside  { grid-area: aside; }
+footer { grid-area: footer; }
+
+/* Fjern ekstra margin på kort i grid */
+.card{ margin: 0; }
+
+
+/* Header og footer skal stå “for seg selv” (full bredde) – ingen endring trengs,
+   men vi gir litt konsistent spacing rundt siden: */
+header, footer{
+    margin: 0; /*Sikrer at de flukter mot kantene – du har allerede padding*/
+}
+
 html, body{
     margin: 0; /*Fjerner standard-margin*/
     padding: 0; /*Fjerner standard-padding*/
@@ -63,9 +93,8 @@ nav ul li a{
 nav ul li a:hover{
     background-color: hsla(25, 96%, 50%, 0.23); /*lilla bakgrunn ved hover*/
     color: #f8f0ea; /*Beige tekst ved hover*/
-    transition: background-color 0.15s ease, color 0.15s ease; /*Myk overgang*/
+     box-shadow: 0 0 10px rgba(253, 106, 0, 0.6); /* Oransje glød */ 
 }
-
 /* === MAIN (artikler i "designede bokser") === */
 main{
     padding: 16px; /*Luft rundt hovedinnhold*/
@@ -78,7 +107,14 @@ main{
     border-radius: 12px; /*Runde hjørner*/
     padding: 20px; /*Luft inni*/
     margin: 10px 0; /*Luft utenfor*/
-    box-shadow: 0 8px 24px rgba(0,0,0,.12); /*Subtil skygge*/
+    box-shadow: 0 8px 24px rgba(255, 68, 0, 0.34); /*Subtil skygge*/
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card:hover{
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0,0,0,.25);
+    border-color: #fd6a00; /* Fremhev kant ved hover */
+    
 }
 .card h2{
     margin-top: 0; /*Fjerner topp-luft*/
@@ -91,6 +127,7 @@ article a{
 }
 article a:hover{
     color: #ffa45a; /*Lys oransje ved hover*/
+
 }
 
 /* Seksjons-header inne i main (bruker type, ikke klasse) */
@@ -102,12 +139,14 @@ main > header{
 
 /* === ASIDE (kontrast mot resten) ============ */
 aside{
-    background-color: #ffad7a; /*Beige kontrastboks (ønsket kontrast)*/
+
     color: #000000; /*Mørk tekst for lesbarhet på beige*/
     border: 1px solid #fe6a00; /*Lysere beige kant*/
     border-radius: 12px; /*Runde hjørner*/
     padding: 20px; /*Luft inni*/
     margin: 16px; /*Luft utenfor*/
+    background: linear-gradient(135deg, #ffad7a, #fd6a00);
+
 }
 aside h3{
     color: #000000; /*Militærgrønn tittel i aside*/
@@ -125,9 +164,11 @@ aside a:hover{
 footer{
     background-color: #000000; /*Mørk footer-bakgrunn*/
     color: #ffffff; /*Hvit tekst*/
-    padding: 10
-    px; /*Luft inni*/
+    padding: 10px; /*Luft inni*/
     border-top: 1px solid #333333; /*Skillelinje mot innholdet*/
+     position: relative;
+    z-index: 0;  
+    background: linear-gradient(0deg, #fd6900a7, #000000, #000000d6); 
 }
 
 /* Skjema i footer – type-selektorer med minst mulig klasser */
@@ -146,15 +187,20 @@ footer input[type="email"],
 footer textarea{
     width: 100%; /*Fyller bredden*/
     padding: 12px; /*Luft inni*/
-    border: 1px solid #4a4a4a; /*Diskret kant*/
+    border: 1px solid #ff7c40; /*Diskret kant*/
     border-radius: 10px; /*Myke hjørner*/
-    background-color: #3f3f3f; /*Mørk grå felt*/
+    background-color: #1d1d1d; /*Mørk grå felt*/
     color: #f5f5f5; /*Lys tekst i feltene*/
 }
 footer textarea{
     min-height: 120px; /*Komfortabelt skrivefelt*/
     resize: vertical; /*La brukeren justere høyden*/
+
 }
+
+
+    
+
 
 /* Knapp (EN LITEN KLASSE – styling utover type) */
 .btn{
@@ -173,7 +219,44 @@ footer textarea{
     background-color: #ffffffd6; /*Lysegrønn ved hover*/
     color: #f96400; /*Mørk tekst på lys grønn*/
     transform: translateY(-1px); /*Litt "løft"*/
+    animation: pulse 0.6s infinite alternate;
+}
+
+@keyframes pulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.05); }
 }
 .btn:active{
     transform: translateY(0); /*Tilbake ved klikk*/
 }
+
+/* === DESKTOP (Mac/PC): tre kolonner main | main | aside */
+    @media (min-width: 900px){
+  .layout{
+    grid-template-columns: 1fr 1fr 320px;  /* to brede kolonner + sidebar/*/
+    grid-template-areas:
+      "header header header"
+      "main   main   aside"
+      "main   main   aside"
+      "footer footer footer";
+    align-items: start;
+  }
+
+  /* Inni MAIN: gjør kortene til 2 kolonner på stor skjerm/*/
+  main > section{
+    display: grid;                 /* aktiver grid i main*/
+    grid-template-columns: 1fr 1fr;/* to kort ved siden av hverandre/*/
+    gap: 16px;                     /* avstand mellom kort */
+  }
+
+  /* Fjern margin når kort står i grid (vi bruker gap) */
+ main .card{ margin: 0; }
+
+  /* Sticky aside (valgfritt, men kjekt) */
+  aside{
+    position: sticky;
+    top: 16px;
+    align-self: start;
+  }
+} /*
+/* ← ingen ekstra '}' her! */
