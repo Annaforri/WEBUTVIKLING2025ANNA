@@ -1,260 +1,317 @@
 /* === GLOBALT ================================ */
+
+/* Setter box-sizing til border-box for alle elementer:
+   - HVA: Inkluderer padding + border i beregning av bredde/høyde.
+   - HVORFOR: Gjør layout enklere og mer forutsigbar. */
 * { 
-    box-sizing: border-box; /*HVA: Inkluderer padding/border i bredde/høyde. HVORFOR: Mer forutsigbar layout. */
+  box-sizing: border-box;
 }
 
-/* === GRID LAYOUT ============================= */
-/* Mobil først: alt under hverandre */
-.layout{
-    display: grid; /*Aktiverer CSS Grid*/
-    grid-template-columns: 1fr; /*En kolonne på mobil*/
-    grid-template-areas:
-        "header"
-        "main"
-        "aside"
-        "footer"; /*Rekkefølge på mobil*/
-    gap: 16px; /*Avstand mellom seksjoner*/
-    padding: 16px; /*Luft rundt innholdet*/
-}
-
-/* Knytt seksjonene til sine områder */
-header { grid-area: header; }
-main   { grid-area: main; }
-aside  { grid-area: aside; }
-footer { grid-area: footer; }
-
-/* Fjern ekstra margin på kort i grid */
-.card{ margin: 0; }
-
-/* Header og footer skal stå “for seg selv” (full bredde) – ingen endring trengs,
-   men vi gir litt konsistent spacing rundt siden: */
-header, footer{
-    margin: 0; /*Sikrer at de flukter mot kantene – du har allerede padding*/
-}
-
-html, body{
-    margin: 0; /*Fjerner standard-margin*/
-    padding: 0; /*Fjerner standard-padding*/
-    background-color: #111111; /*Bakgrunn: nesten sort*/
-    color: #f5f5f5; /*Tekst: lys grå for god kontrast*/
-    font-family: 'Arial', sans-serif; /*Skrifttype*/
-    line-height: 1.6; /*Bedre lesbarhet*/
+/* HTML og body (grunnoppsett for hele siden) */
+html, body {
+  margin: 0; /* Fjerner standardmargin */
+  padding: 0; /* Fjerner standardpadding */
+  background-color: #000000; /* Setter bakgrunnsfarge til svart */
+  color: #ffffff; /* Setter tekstfarge til hvit */
+  font-family: Arial, sans-serif; /* Standard font */
+  line-height: 1.6; /* Bedre lesbarhet */
+  font-size: calc(1em + 1vw); /* Dynamisk skriftstørrelse: vokser med viewport-bredden */
 }
 
 /* Standard lenker */
-a{
-    color: #ed8a58; /*Lysegrønn lenkefarge*/
-    text-decoration: none; /*Fjerner understrek*/
+a {
+  color: hsl(146, 52%, 72%); /* Lys grønn lenkefarge */
+  text-decoration: none; /* Fjerner understrek */
 }
-a:hover{
-    color: #f4a261; /*Lys oransje ved hover (ønsket)*/
+a:hover {
+  color: #17ce11; /* Endrer farge ved hover */
 }
+
+/* === GRID LAYOUT ============================= */
+
+/* Mobil først: en kolonne-layout */
+.layout {
+  display: grid; /* Aktiverer CSS Grid */
+  grid-template-columns: 1fr; /* Én kolonne */
+  grid-auto-rows: minmax(100px, auto); /* Rader blir minst 100px, men kan vokse */
+  grid-template-areas:
+    "header"
+    "hero"
+    "ck"
+    "cp"
+    "co"
+    "aside"
+    "footer"; /* Definerer rekkefølgen på mobil */
+  gap: 0; /* Ingen mellomrom mellom seksjoner */
+  padding: 16px; /* Luft rundt innholdet */
+}
+
+/* Wrapper rundt kortene: display: contents fjerner "ekstra div" 
+   - slik at artiklene blir direkte grid-barn */
+.cards { 
+  display: contents; 
+}
+
+/* Kobler seksjoner til grid-områdene */
+header { grid-area: header; }
+.hero { grid-area: hero; }
+.cardkontakt { grid-area: ck; }
+.cardstudieplan { grid-area: cp; }
+.cardoversikt { grid-area: co; }
+aside { grid-area: aside; }
+footer { grid-area: footer; }
+
+/* Fjern ekstra margin på kort i grid */
+.card { margin: 0; }
+
+/* Header og footer har ikke margin (skal gå i kantene) */
+header, footer { margin: 0; }
 
 /* === HEADER ================================ */
 header {
-    display: flex; /*Aktiverer flexbox*/
-    justify-content: space-between; /*Plasserer elementer fra hverandre*/
-    align-items: center; /*Sentrerer vertikalt*/
-    background-color: #000000; /*Mørk header-bakgrunn*/
-    color: #ffffff; /*Tekstfarge i header*/
-    padding: 12px 16px; /*Avstand rundt innhold*/
-    margin: 0; /*Fjerner margin rundt header*/
-    border-bottom: 1px solid #333333; /*Tynn skillelinje*/
-    font-size: 15px; /*Tekststørrelse*/
-    font-weight: bold; /*Fet tekst*/
+  display: flex; /* Bruker flexbox for logo + meny */
+  justify-content: space-between; /* Plasser logo til venstre og meny til høyre */
+  align-items: center; /* Sentrerer vertikalt */
+  flex-wrap: nowrap; /* Hindrer at elementer bryter linjen */
+  background: #000; /* Svart bakgrunn */
+  color: #fff; /* Hvit tekst */
+  padding: 12px 16px; /* Luft rundt innhold */
+  border-bottom: 1px solid #333; /* Tynn linje nederst */
+  font-size: 15px; /* Tekststørrelse */
+  font-weight: bold; /* Fet skrift */
+  top: 0;
+  position: relative; /* Kan brukes til posisjonering senere */
 }
 
-/* Logo/overskrift i header */
-header h3{
-    margin: 0; /*Fjerner ekstra luft*/
-    font-size: 1rem; /*Tilpasset størrelse*/
-    letter-spacing: 0.06em; /*Litt bokstavluft*/
+/* Logoen */
+header h3 { 
+  margin: 0; /* Ingen ekstra luft */
+  font-size: 1rem; /* Størrelse */
+  letter-spacing: .06em; /* Litt avstand mellom bokstaver */
 }
-header h3 a{
-    color: #e8decf; /*Beige logo/lenke*/
-}
-
-/* Navigasjon i header */
-nav ul{
-    list-style: none; /*Fjerner punktmerking*/
-    margin: 0; /*Null margin*/
-    padding: 6px 0; /*Litt luft opp/ned*/
-    display: flex; /*Vannrett meny*/
-    gap: 20px; /*Mellomrom mellom punkter*/
-}
-nav ul li a{
-    color: #ffffff; /*Hvit tekst i menyen*/
-    font-size: 15px; /*Tekststørrelse*/
-    font-weight: bold; /*Fet*/
-    padding: 10px; /*Klikkeflate*/
-    border-radius: 8px; /*Myke hjørner for hover-bakgrunn*/
-}
-nav ul li a:hover{
-    background-color: hsla(25, 96%, 50%, 0.23); /*lilla bakgrunn ved hover*/
-    color: #f8f0ea; /*Beige tekst ved hover*/
-     box-shadow: 0 0 10px rgba(253, 106, 0, 0.6); /* Oransje glød */ 
-}
-/* === MAIN (artikler i "designede bokser") === */
-main{
-    padding: 16px; /*Luft rundt hovedinnhold*/
+header h3 a { 
+  color: #e8decf; /* Lys beige tekst på logo */
 }
 
-/* Kortboks-stil for artikler (EN LITEN KLASSE – gjenbrukbar) */
-.card{
-    background-color: #020202; /*Mørk grå boks*/
-    border: 2px solid #ff7b00e0; /*Litt lysere grå kant*/
-    border-radius: 12px; /*Runde hjørner*/
-    padding: 20px; /*Luft inni*/
-    margin: 10px 0; /*Luft utenfor*/
-    box-shadow: 0 8px 24px rgba(255, 68, 0, 0.34); /*Subtil skygge*/
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+/* Logo-ikonet (Font Awesome ikon) */
+.logo a {
+  display: inline-flex;      /* gjør at ikon og tekst ligger på linje */
+  align-items: center;       /* vertikal sentrering */
+  gap: 8px;                  /* mellomrom mellom ikon og tekst */
+  text-decoration: none;     /* fjerner understrek */
+  color: #fff;               /* hvit tekst */
+  font-weight: bold;         /* gjør teksten sterkere */
+  font-size: 1.2rem;         /* større enn default */
 }
-.card:hover{
-    transform: translateY(-4px);
-    box-shadow: 0 12px 28px rgba(0,0,0,.25);
-    border-color: #fd6a00; /* Fremhev kant ved hover */
-    
+
+.logo i {
+  font-size: 28px;           /* størrelse på ikonet */
+  color: #fff;
 }
-.card h2{
-    margin-top: 0; /*Fjerner topp-luft*/
-    color: #fa7a25; /*Lysegrønn tittel i boks*/
+
+.logo-text {
+  font-size: 1.2rem;
+}
+
+.logo .tagline {
+  display: block;            /* plasseres under */
+  font-size: 0.85rem;        /* mindre tekst */
+  color: #ccc;               /* grå for mindre kontrast */
+  margin-top: 2px;
+}
+
+/* Navigasjon */
+nav ul {
+  list-style: none; /* Fjerner punktmerking */
+  margin: 0; /* Null margin */
+  padding: 6px 0; /* Litt luft opp/ned */
+  display: flex; /* Horisontal meny */
+  flex-direction: row; /* Ekspisitt rad */
+  gap: 20px; /* Avstand mellom lenker */
+  align-items: center; /* Sentrerer i høyden */
+}
+nav ul li a {
+  color: #fff; /* Hvit tekst */
+  font-size: 15px; /* Tekststørrelse */
+  font-weight: bold; /* Fet */
+  padding: 10px; /* Klikkeflate */
+  border-radius: 8px; /* Runde hjørner */
+  text-decoration: none; /* Ingen understrek */
+  display: inline-block; /* Gir padding effekt */
+}
+nav ul li a:hover {
+  background-color: hsla(0,0%,100%,.08); /* Halvtransparent bakgrunn */
+  color: hsl(146, 52%, 72%); /* Endrer tekstfarge */
+  box-shadow: 0 0 10px hsla(146, 52%, 72%, 0.29); /* Grønn glød */
+}
+
+/* === MAIN / KORT =========================== */
+main { 
+  padding: 16px; /* Luft rundt hovedinnhold */
+}
+
+.card {
+  background-color: hsl(146, 52%, 72%); /* Grønn boks */
+  border: 2px solid #000000e0; /* Svart kant */
+  border-radius: 12px; /* Runde hjørner */
+  padding: 20px; /* Luft inni */
+  margin: 10px 0; /* Luft utenfor */
+  box-shadow: 0 8px 24px rgba(0,0,0,.34); /* Skygge */
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; /* Smooth overgang */
+}
+.card:hover {
+  transform: translateY(-4px); /* Løfter kortet */
+  box-shadow: 0 12px 28px rgba(0,0,0,.25); /* Dypere skygge */
+  border-color: #0000009b; /* Fremhevet kant */
+}
+.card h2 {
+  margin-top: 0; /* Ingen luft på toppen */
+  color: #000; /* Svart tittel */
+}
+.card p { 
+  color: #000; /* Svart tekst */
 }
 
 /* Lenker inni artikler */
-article a{
-    color: #ff7b00e0; /*mørk lilla lenke*/
-}
-article a:hover{
-    color: #ffa45a; /*Lys oransje ved hover*/
+article a { color:#000000; text-decoration: underline;}
+article a:hover { color:#000000; border-bottom: 3px solid hsl(146, 100%, 40%); text-decoration: none;}
 
-}
-
-/* Seksjons-header inne i main (bruker type, ikke klasse) */
-main > header{
-    border-bottom: 2px solid #fd6a00; /*Diskret linje*/
-    margin: 0 0 12px 0; /*Luft under*/
-    padding-bottom: 6px; /*Litt padding under tekst*/
+/* Seksjons-header i main */
+main > header {
+  border-bottom: 2px solid #fff;
+  margin: 0 0 12px 0;
+  padding-bottom: 6px;
+  background-size: cover;
 }
 
-/* === ASIDE (kontrast mot resten) ============ */
-aside{
-
-    color: #000000; /*Mørk tekst for lesbarhet på beige*/
-    border: 1px solid #fe6a00; /*Lysere beige kant*/
-    border-radius: 12px; /*Runde hjørner*/
-    padding: 20px; /*Luft inni*/
-    margin: 16px; /*Luft utenfor*/
-    background: linear-gradient(135deg, #ffad7a, #fd6a00);
-
+/* === HERO ================================== */
+.hero {
+  position: relative; /* For gradientlag */
+  height: 300px; /* Høyde på hero */
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-image: url("https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8");
+  background-size: cover; /* Dekker hele */
+  background-position: center;
+  background-repeat: no-repeat;
 }
-aside h3{
-    color: #000000; /*Militærgrønn tittel i aside*/
-    margin-top: 0; /*Null topp-luft*/
+.hero::before {
+  content: ""; /* Lager et ekstra lag */
+  position: absolute;
+  inset: 0; /* Fyller hele hero */
+  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.3)); /* Gradient */
+  z-index: 1; /* Ligger under tekst */
 }
-aside a{
-    color: #111111; /*Mørke lenker i lys boks*/
-    text-decoration: underline; /*Tydelig lenke på lys bakgrunn*/
-}
-aside a:hover{
-    color: #a34900; /*Lys oransje ved hover (konsekvent)*/
-}
-
-/* === FOOTER (mørk) ========================= */
-footer{
-    background-color: #000000; /*Mørk footer-bakgrunn*/
-    color: #ffffff; /*Hvit tekst*/
-    padding: 10px; /*Luft inni*/
-    border-top: 1px solid #333333; /*Skillelinje mot innholdet*/
-     position: relative;
-    z-index: 0;  
-    background: linear-gradient(0deg, #fd6900a7, #000000, #000000d6); 
+.hero-content {
+  position: relative;
+  z-index: 2; /* Tekst over gradient */
+  color: #fff;
 }
 
-/* Skjema i footer – type-selektorer med minst mulig klasser */
-footer form{
-    display: grid; /*Enkel, ryddig layout*/
-    gap: 2px; /*Avstand mellom felt*/
-    max-width: 640px; /*Behagelig bredde*/
+/* === ASIDE ================================ */
+aside {
+  color: #000; /* Svart tekst */
+  border: 1px solid #000;
+  border-radius: 12px;
+  padding: 20px; /* Luft inni */
+  margin: 16px; /* Luft utenfor */
+  background-color: hsl(0, 0%, 100%); /* Lilla boks */
 }
-footer label{
-    display: block; /*Legger hvert felt på egen linje*/
-    font-weight: bold; /*Tydelige labels*/
-    color: #ffffff; /*Beige labels for subtil kontrast*/
+aside h3 { color: #000; margin-top: 0; }
+aside a { color:#111; text-decoration: underline; }
+aside a:hover { color: hsl(0, 0%, 0%);  border-bottom: 3px solid hsl(146, 52%, 72%); text-decoration: none;}
+
+/* === FOOTER ================================ */
+footer {
+  background: #000; /* Svart */
+  color: #fff; /* Hvit tekst */
+  padding: 10px; /* Luft inni */
+  border-top: 1px solid #333; /* Skillelinje */
+  position: relative;
+  z-index: 0;
+}
+footer form {
+  display: grid; /* Skjemafeltene i grid */
+  gap: 2px; /* Mellomrom mellom feltene */
+  max-width: 640px; /* Bredden begrenses */
+}
+footer label {
+  display: block;
+  font-weight: bold;
+  color: #fff;
 }
 footer input[type="text"],
 footer input[type="email"],
-footer textarea{
-    width: 100%; /*Fyller bredden*/
-    padding: 12px; /*Luft inni*/
-    border: 1px solid #ff7c40; /*Diskret kant*/
-    border-radius: 10px; /*Myke hjørner*/
-    background-color: #1d1d1d; /*Mørk grå felt*/
-    color: #f5f5f5; /*Lys tekst i feltene*/
+footer textarea {
+  width: 100%; /* Fyll bredden */
+  padding: 12px;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  background: #1d1d1d; /* Mørk bakgrunn */
+  color: #f5f5f5; /* Lys tekst */
 }
-footer textarea{
-    min-height: 120px; /*Komfortabelt skrivefelt*/
-    resize: vertical; /*La brukeren justere høyden*/
-
-}
-
-    
-
-/* Knapp (EN LITEN KLASSE – styling utover type) */
-.btn{
-    display: inline-block; /*Lar oss styre padding/bredde*/
-    padding: 12px 16px; /*Klikkeflate*/
-    border-radius: 12px; /*Myke hjørner*/
-    font-weight: bold; /*Tydelig knappetekst*/
-    text-transform: uppercase; /*Knappepreg*/
-    cursor: pointer; /*Pekehånd*/
-    background-color: #000000; /*Militærgrønn knapp*/
-    color: #e8decf; /*Beige tekst*/
-    border: 1px solid #ffffff; /*Lysegrønn kant*/
-    transition: background-color .15s ease, color .15s ease, transform .08s ease; /*Myke overganger*/
-}
-.btn:hover{
-    background-color: #ffffffd6; /*Lysegrønn ved hover*/
-    color: #f96400; /*Mørk tekst på lys grønn*/
-    transform: translateY(-1px); /*Litt "løft"*/
-    animation: pulse 0.6s infinite alternate;
+footer textarea {
+  min-height: 120px; /* Gjør det stort nok */
+  resize: vertical; /* Lar brukeren dra i høyden */
 }
 
+/* Knapp */
+.btn {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: #000;
+  color: #e8decf; /* Beige tekst */
+  border: 1px solid #fff;
+  transition: background-color .15s, color .15s, transform .08s;
+}
+.btn:hover {
+  background: hsl(146, 52%, 72%);
+  color: #000;
+  transform: translateY(-1px); /* Løfter knappen */
+  animation: pulse .6s infinite alternate;
+}
 @keyframes pulse {
-    from { transform: scale(1); }
-    to { transform: scale(1.05); }
+  from { transform: scale(1); }
+  to   { transform: scale(1.05); }
 }
-.btn:active{
-    transform: translateY(0); /*Tilbake ved klikk*/
-}
+.btn:active { transform: translateY(0); }
 
-/* === DESKTOP (Mac/PC): tre kolonner main | main | aside */
-@media (min-width: 900px){
-  .layout{
-    grid-template-columns: 1fr 1fr 320px;  /* to brede kolonner + sidebar */
+/* === DESKTOP (≥900px): Oppsett med 3 kolonner */
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr 1fr 320px; /* To like brede kolonner + en smalere til aside */
+    grid-auto-columns: minmax(100px, auto);
     grid-template-areas:
       "header header header"
-      "main   main   aside"
-      "main   main   aside"
+      "hero   hero   hero"
+      "ck     cp     aside"
+      "co     co     aside"
       "footer footer footer";
-    align-items: start;
+    gap: 16px;
+    align-self: center;
   }
 
-  /* Inni MAIN: gjør kortene til 2 kolonner på stor skjerm */
-  main > section{
-    display: grid;                 /* aktiver grid i main */
-    grid-template-columns: 1fr 1fr;/* to kort ved siden av hverandre */
-    gap: 16px;                     /* avstand mellom kort */
+  html, body {
+    font-size: 18px;
   }
 
-  /* Fjern margin når kort står i grid (vi bruker gap) */
-  main .card{ margin: 0; }
-
-  /* Sticky aside (valgfritt, men kjekt) */
-  aside{
-    position: sticky;
-    top: 16px;
-    align-self: start;
+  .hero-content{
+    font-size: 35px;
   }
+
+  h1 h2 { font-size: 22px;} 
+
+
+
+  .cardoversikt { align-items: start; }
+  .card { margin: 0; } /* Fjerner margin (vi bruker gap i stedet) */
+
+  /* Gjør aside sticky: følger med ved scroll */
+  aside { position: sticky; top: 16px; align-self: start; }
 }
-/* ← ingen ekstra '}' her! */
-
