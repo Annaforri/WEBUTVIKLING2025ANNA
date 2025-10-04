@@ -1,0 +1,95 @@
+/* :root = rotnoden i dokumentet. Her kan vi lage «variabler» (CSS custom properties)
+   som kan brukes overalt. De starter med --navn og hentes med var(--navn). */
+:root{
+  --bakgrunn: #ffffff; /* sidebakgrunn */
+  --tekst: #111111;    /* hovedtekstfarge */
+  --dempet: #6b7280;   /* grå brødtekst/undertekst */
+  --primar: #0ea5e9;   /* primærfarge (knapper/lenker) */
+  --primar-hover:#0284c7; /* mørkere variant ved hover */
+  --sekundar:#22c55e;  /* sekundær aksentfarge */
+  --radius: 20px;      /* hjørneradius brukt på kort/bokser */
+  --skygge: 0 8px 24px rgba(0,0,0,.08); /* myk skygge */
+  --maksbredde: 1120px; /* maks bredde på innhold (beholder) */
+
+  /* Typografi-størrelser som skalerer med skjermbredde */
+  --fs-300: clamp(.9rem, .85rem + .2vw, 1rem); /* liten tekst */
+  --fs-400: clamp(1rem, 1rem + .3vw, 1.15rem); /* brødtekst */
+  --fs-800: clamp(2rem, 1.6rem + 2.5vw, 3rem); /* stor tittel (hero) */
+}
+
+/* Reset + grunnstil */
+*, *::before, *::after{ box-sizing: border-box; } /* inkluderer padding/border i bredde/høyde; ::before/::after er pseudo-elementer (virtuelle innholdsbokser) */
+html, body{ height:100%; } /* høyde på hele dokumentet = 100% */
+body{ /* grunnstil for hele siden */
+  margin:0; /* fjern standard margin */
+  padding:0; /* fjern standard padding */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; /* gode systemskrifter */
+  font-size: var(--fs-400); /* brødtekststørrelse */
+  line-height: 1.6; /* linjehøyde for lesbarhet */
+  color: var(--tekst); /* hovedtekstfarge */
+  background: var(--bakgrunn); /* sidebakgrunn */
+}
+img{ max-width:100%; display:block; } /* bilder skalerer innenfor container */
+a{ color:inherit; text-decoration:none; } /* lenker arver farge og har ikke understrek som standard */
+
+/* Hjelpeklasser */
+.beholder{ width:min(100% - 2rem, var(--maksbredde)); margin-inline:auto; } /* sentrerer innhold og setter maks bredde */
+.knapp{ display:inline-block; padding:.875rem 1.125rem; border-radius:.875rem; font-weight:600; border:1px solid transparent; } /* generell knappstil */
+.knapp--primar{ background:var(--primar); color:#fff; } /* blå primærknapp */
+.knapp--primar:hover{ background:var(--primar-hover); } /* mørkere ved hover */
+.knapp--sekundar{ background:#fff; border-color:#e5e7eb; } /* lys sekundærknapp */
+.merkelapp{ display:inline-flex; gap:.5rem; align-items:center; padding:.35rem .7rem; border-radius:999px; background:#f1f5f9; font-size:var(--fs-300); color:#0f172a; } /* liten «pill» */
+
+/* TOPPFELT */
+.toppfelt{ position:sticky; top:0; z-index:50; background:#ffffffcc; backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid #e5e7eb; } /* sticky + lett blur */
+.navigasjon{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:.75rem 1rem; } /* rad med fordeling */
+.merke{ display:flex; align-items:center; gap:.6rem; font-weight:800; letter-spacing:.2px; } /* logo + navn */
+.merke__logo{ width:36px; aspect-ratio:1; border-radius:10px; background:linear-gradient(135deg,var(--primar),var(--sekundar)); box-shadow:var(--skygge); } /* enkel gradient-logo */
+.merke__tekst{ font-size:1.05rem; } /* litt større logotekst */
+
+/* Burger + checkbox-hack (mobil først) */
+.menybryter{ position:absolute; left:-9999px; } /* visuelt skjult, men fortsatt fokusbar for skjermleser */
+.burgerknapp{ display:inline-flex; flex-direction:column; gap:5px; cursor:pointer; padding:.4rem; border-radius:.6rem; } /* selve knappen */
+.burgerknapp span{ display:block; width:26px; height:3px; background:#111; border-radius:2px; } /* tre streker */
+.meny{ position:fixed; inset:64px 0 auto 0; background:#fff; border-bottom:1px solid #e5e7eb; padding:1rem; display:none; flex-direction:column; align-items:flex-start; gap:.25rem; } /* skjult panel som dukker ned fra toppfeltet */
+#menybryter:checked ~ .meny{ display:flex; } /* NØKKELEN: når checkbox er krysset av, vis menyen */
+.meny a{ padding:.5rem .6rem; border-radius:.6rem; } /* litt klikkflate rundt lenker */
+.meny a:focus-visible{ outline:2px solid var(--primar); } /* tydelig fokus for tastaturbrukere */
+
+/* HELTOPP (hero) */
+.heltopp{ background: radial-gradient(1200px 400px at 50% -200px, #e0f2fe, transparent 70%), #fff; border-bottom:1px solid #e5e7eb; } /* myk lys bakgrunn med kantlinje */
+.heltopp__innhold{ padding: clamp(2rem, 6vw, 5rem) 0; } /* responsiv vertikal padding */
+.heltopp h1{ font-size: var(--fs-800); line-height:1.15; margin:.5rem 0 1rem; } /* stor tittel */
+.innledning{ color:var(--dempet); max-width:60ch; } /* dempet introtekst med behagelig linjelengde */
+.heltopp__knapper{ display:flex; gap:.75rem; margin-top:1rem; flex-wrap:wrap; } /* rad med CTA-knapper */
+
+/* KORTSEKSJON */
+.grid-kort{ display:grid; gap:1rem; padding: clamp(1.5rem, 5vw, 3rem) 0; } /* grid med mellomrom og god luft */
+.kort{ padding:1.25rem; border:1px solid #e5e7eb; border-radius:var(--radius); box-shadow: var(--skygge); background:#fff; } /* kort med kant og skygge */
+.kort h3{ margin-top:.25rem; margin-bottom:.5rem; font-size:1.1rem; } /* korttittel */
+.kort p{ color:var(--dempet); } /* brødtekst i kort */
+.kort__lenke{ display:inline-block; margin-top:.75rem; font-weight:600; color:var(--primar); } /* lenke i kort */
+
+/* INNHOLD + SIDEFELT */
+.innhold__grid{ display:grid; gap:1.25rem; padding: clamp(1.5rem, 5vw, 3rem) 0; } /* grid som senere blir to kolonner */
+.sidefelt{ position:relative; } /* kontekst for sticky boks */
+.sidefelt__boks{ position:sticky; top:88px; padding:1.25rem; border:1px solid #e5e7eb; border-radius:var(--radius); box-shadow:var(--skygge); background:#fff; display:grid; gap:.5rem; } /* følger med ved scroll til en grense */
+
+/* BUNNFELT */
+.bunnfelt{ border-top:1px solid #e5e7eb; background:#fff; } /* tynn kant på toppen */
+.bunnfelt__innhold{ display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; } /* rad med plass mellom tekst og lenker */
+.bunnfelt__meny{ display:flex; gap:.75rem; } /* små footerlenker på rekke */
+.bunnfelt__meny a{ color:var(--dempet); } /* dempet farge på footerlenker */
+
+/* BREAKPOINTS (utvider fra mobil -> større skjermer) */
+@media (min-width: 640px){ /* liten nettbreddestørrelse */
+  .grid-kort{ grid-template-columns: repeat(2, minmax(0,1fr)); } /* to kort i bredden */
+}
+@media (min-width: 769px){ /* desktopgrense: meny alltid synlig */
+  .burgerknapp{ display:none; } /* skjul burger på desktop */
+  .meny{ position:static; display:flex; flex-direction:row; align-items:center; gap:.75rem; padding:0; border:0; } /* normal horisontal meny */
+}
+@media (min-width: 900px){ /* større desktop */
+  .grid-kort{ grid-template-columns: repeat(3, minmax(0,1fr)); } /* tre kort i bredden */
+  .innhold__grid{ grid-template-columns: 1fr 320px; } /* to kolonner: tekst + smal sidebar */
+}

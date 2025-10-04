@@ -62,7 +62,7 @@ aside { grid-area: aside; }
 footer { grid-area: footer; }
 
 /* Fjern ekstra margin på kort i grid */
-.card { margin: 0; }
+.card{ margin: 0; }
 
 /* Header og footer har ikke margin (skal gå i kantene) */
 header, footer { margin: 0; }

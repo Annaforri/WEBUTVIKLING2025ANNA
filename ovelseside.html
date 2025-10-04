@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="nb">
+    <head>
+        <meta charset="UTF-8"/>
+        <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" type="text/css" href="css/stylebasic.css"/>
+        <title> Øvelse - studieuka </title>
+    </head>
+
+<body> <!-- Selve siden begynner -->
+
+    <!-- TOPPFELT (sticky header uten ekstra luft) -->
+    <header class="toppfelt"> <!-- toppfelt = fast toppmeny som følger med opp/ned -->
+      <div class="navigasjon beholder"> <!-- navigasjon = wrapper for logo, burger og meny / beholder = sentrerer innhold -->
+        <a class="merke" href="#" aria-label="Hjem"> <!-- merke = logo + navn, lenke til forsiden -->
+          <span class="merke__logo" aria-hidden="true"></span> <!-- visuell logo (dekorativ) -->
+          <span class="merke__tekst">Ditt Brand</span> <!-- navnet som tekst -->
+        </a>
+
+        <!-- Burger + checkbox-hack (kun CSS): klikker på label => sjekker checkbox => viser meny -->
+        <input id="menybryter" type="checkbox" class="menybryter" aria-label="Åpne/lukk meny" /> <!-- skjult av CSS, men fokus/tilgjengelig -->
+        <label class="burgerknapp" for="menybryter" aria-hidden="true"> <!-- label som kan klikkes for å togg­le menyen -->
+          <span></span><span></span><span></span> <!-- de tre strekene i burgerikonet -->
+        </label>
+
+        <nav class="meny" aria-label="Hovedmeny"> <!-- meny = navigasjonslenker -->
+          <a href="#tjenester">Tjenester</a> <!-- lenke til seksjon -->
+          <a href="#om">Om oss</a> <!-- lenke til seksjon -->
+          <a href="#kontakt">Kontakt</a> <!-- lenke til seksjon -->
+          <a class="knapp knapp--primar" href="#bestill">Bestill time</a> <!-- tydelig primærhandling -->
+        </nav>
+      </div>
+    </header>
+
+    <!-- HELTOPP (hero) full bredde, uten luft over) -->
+    <section class="heltopp" id="heltopp"> <!-- visuell intro med tittel og knapper -->
+      <div class="beholder heltopp__innhold"> <!-- begrenser maks bredde og gir innvendig luft -->
+        <p class="merkelapp">Nyhet • Høstkampanje</p> <!-- liten «pill» merkelapp -->
+        <h1>Bygg en enkel, responsiv side raskt</h1> <!-- hovedbudskap -->
+        <p class="innledning">Mobil først, ryddig grid på desktop og tilgjengelig navigasjon — i tråd med skissene.</p> <!-- kort forklaring -->
+        <div class="heltopp__knapper"> <!-- holder CTA-knappene samlet -->
+          <a class="knapp knapp--primar" href="#bestill">Kom i gang</a> <!-- primær knapp -->
+          <a class="knapp knapp--sekundar" href="#tjenester">Se funksjoner</a> <!-- sekundær knapp -->
+        </div>
+      </div>
+    </section>
+
+    <!-- KORTSEKSJON (3 kort i grid på større skjerm, stablet på mobil) -->
+    <section class="kortseksjon" id="tjenester"> <!-- presenterer tre fordeler/ting -->
+      <div class="beholder grid-kort"> <!-- grid-kort = selve griden med kort -->
+        <article class="kort"> <!-- et enkelt kort -->
+          <h3>Rask å sette opp</h3> <!-- korttittel -->
+          <p>Minimal CSS med design‑tokens. Lett å justere farger, radius og skygge.</p> <!-- beskrivelse -->
+          <a href="#" class="kort__lenke">Les mer</a> <!-- lenke knyttet til kortet -->
+        </article>
+        <article class="kort">
+          <h3>Mobil først</h3>
+          <p>Stack på mobil, grid på større skjermer. Ingen uønskede mellomrom.</p>
+          <a href="#" class="kort__lenke">Les mer</a>
+        </article>
+        <article class="kort">
+          <h3>Klar for produksjon</h3>
+          <p>Semantisk HTML, sticky header og fokus-stater for tastaturnavigasjon.</p>
+          <a href="#" class="kort__lenke">Les mer</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- INNHOLD + SIDEFELT (grid her, ikke på hele siden) -->
+    <section class="innhold" id="om"> <!-- hovedinnhold -->
+      <div class="beholder innhold__grid"> <!-- to kolonner på desktop: artikkel + sidefelt -->
+        <article> <!-- tekstkolonne -->
+          <h2>Om løsningen</h2> <!-- seksjonstittel -->
+          <p>Strukturen speiler en typisk landingsside: heltopp, kortseksjon, hovedinnhold og en sidebar for kontakt/CTA.</p> <!-- beskrivelse -->
+          <p>Denne malen er laget for å ligne skissene dine på både mobil og desktop.</p> <!-- ekstra kontekst -->
+          <ul> <!-- punktliste med fordeler -->
+            <li>Full-bredde toppfelt og heltopp uten luft på toppen</li>
+            <li>Grid kun på innholdet, ikke på hele siden</li>
+            <li>Sticky toppfelt med lett blur og ramme</li>
+          </ul>
+        </article>
+        <aside class="sidefelt" id="kontakt"> <!-- høyre kolonne -->
+          <div class="sidefelt__boks"> <!-- sticky boks med kontaktinfo -->
+            <h3>Kontakt oss</h3> <!-- tittel i sidefelt -->
+            <p>E‑post: <a href="mailto:hei@example.com">hei@example.com</a></p> <!-- epostlenke -->
+            <p>Tlf: <a href="tel:+4712345678">+47 12 34 56 78</a></p> <!-- telefonlenke -->
+            <a class="knapp knapp--primar" id="bestill" href="#">Bestill time</a> <!-- primær handling i sidefelt -->
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- BUNNFELT -->
+    <footer class="bunnfelt"> <!-- avsnitt nederst med smålenker -->
+      <div class="beholder bunnfelt__innhold"> <!-- fleksraden i footer -->
+        <p>© <span id="ar"></span> Ditt Brand</p> <!-- dynamisk årstall -->
+        <nav class="bunnfelt__meny"> <!-- sekundærmeny -->
+          <a href="#personvern">Personvern</a> <!-- lenke til side -->
+          <a href="#vilkar">Vilkår</a> <!-- lenke til side -->
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('ar').textContent = new Date().getFullYear(); // setter inneværende år i footer
+    </script>
+  </body>
+</html>
