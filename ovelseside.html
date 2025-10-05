@@ -1,89 +1,180 @@
 <!DOCTYPE html>
-<html lang="nb">
-    <head>
-        <meta charset="UTF-8"/>
-        <Meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <link rel="stylesheet" type="text/css" href="css/stylebasic.css"/>
-        <title> Øvelse - studieuka </title>
-    </head>
+<html lang="nb"> <!-- språk satt til norsk -->
+  <head>
+    <meta charset="UTF-8" /> <!-- riktig tegnsett for nordiske tegn -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    /> <!-- mobiltilpasning / zoom -->
+    <link
+      rel="stylesheet"
+      href="css/stylebasic.css"
+      type="text/css"
+    /> <!-- kobler til CSS-filen -->
+    <title>Øvelse – studieuka</title> <!-- tekst i fane/tittel -->
+  </head>
 
-    <body>
-
-    <!-- TOPPFELT (sticky header uten ekstra luft) -->
-    <header class="toppfelt"> <!-- toppfelt = fast toppmeny som følger med opp/ned -->
-      <div class="navigasjon beholder"> <!-- navigasjon = wrapper for logo, burger og meny / beholder = sentrerer innhold -->
-        <a class="merke" href="#" aria-label="Hjem"> <!-- merke = logo + navn, lenke til forsiden -->
-          <span class="merke__logo" aria-hidden="true"></span> <!-- visuell logo (dekorativ) -->
-          <span class="merke__tekst">Fredrikstad Yoga</span> <!-- navnet som tekst -->
+  <body>
+    <!-- ===================== TOPPFELT ===================== -->
+    <header class="toppfelt"> <!-- sticky toppmeny -->
+      <div class="navigasjon beholder"> <!-- wrapper + sentrerer innhold -->
+        <a
+          class="merke"
+          href="#"
+          aria-label="Hjem"
+        > <!-- logo/tekst som lenke til forsiden -->
+          <span
+            class="merke__logo"
+            aria-hidden="true"
+          ></span> <!-- dekorativ «logo-blob» -->
+          <span class="merke__tekst">Fredrikstad Yoga</span> <!-- navn -->
         </a>
 
-        <!-- Burger + checkbox-hack (kun CSS): klikker på label => sjekker checkbox => viser meny -->
-        <input id="menybryter" type="checkbox" class="menybryter" aria-label="Åpne/lukk meny" /> <!-- skjult av CSS, men fokus/tilgjengelig -->
-        <label class="burgerknapp" for="menybryter" aria-hidden="true"> <!-- label som kan klikkes for å togg­le menyen -->
-          <span></span><span></span><span></span> <!-- de tre strekene i burgerikonet -->
+        <!-- Burger + checkbox-hack (kun CSS) -->
+        <input
+          id="menybryter"
+          type="checkbox"
+          class="menybryter"
+          aria-label="Åpne/lukk meny"
+        /> <!-- skjult input som styrer meny -->
+        <label
+          class="burgerknapp"
+          for="menybryter"
+          aria-hidden="true"
+        > <!-- klikkområde for å togg­le menyen -->
+          <span></span>
+          <span></span>
+          <span></span> <!-- de tre strekene -->
         </label>
 
-        <nav class="meny" aria-label="Hovedmeny"> <!-- meny = navigasjonslenker -->
-          <a href="#blogg">Blogg</a> <!-- lenke til bloggseksjonen -->
-          <a href="#tjenester">Timer</a> <!-- lenke til kortseksjon -->
-          <a href="#kontakt">Kontakt</a> <!-- lenke til sidefelt -->
-          <a class="knapp knapp--primar" href="#bestill">Prøv en time</a> <!-- tydelig primærhandling -->
+        <nav
+          class="meny"
+          aria-label="Hovedmeny"
+        > <!-- navigasjonslenker -->
+          <a href="#blogg">Blogg</a>     <!-- lenker ruller til seksjoner -->
+          <a href="#tjenester">Timer</a>
+          <a href="#kontakt">Kontakt</a>
+          <a
+            class="knapp knapp--primar"
+            href="#bestill"
+          >Prøv en time</a> <!-- primær CTA -->
         </nav>
       </div>
     </header>
 
-    <!-- HELTOPP (hero) full bredde, uten luft over) -->
-    <section class="heltopp" id="heltopp"> <!-- visuell intro med tittel og knapper -->
-      <div class="beholder heltopp__innhold"> <!-- begrenser maks bredde og gir innvendig luft -->
-        <p class="merkelapp">Blogg • Mental helse</p> <!-- liten «pill» merkelapp -->
+    <!-- ====================== HELTOPP ====================== -->
+    <section
+      class="heltopp"
+      id="heltopp"
+    > <!-- visuell intro/hero med bakgrunnsbilde -->
+      <div class="beholder heltopp__innhold"> <!-- maks bredde + luft -->
+        <p class="merkelapp">Blogg • Mental helse</p> <!-- liten «pill» -->
         <h1>Yoga for et roligere sinn</h1> <!-- hovedbudskap -->
-        <p class="innledning">Hvordan pust, bevegelse og tilstedeværelse kan dempe stress, styrke nervesystemet og gi bedre søvn.</p> <!-- kort forklaring -->
-        <div class="heltopp__knapper"> <!-- holder CTA-knappene samlet -->
-          <a class="knapp knapp--primar" href="#blogg">Les artikkelen</a> <!-- primær knapp -->
-          <a class="knapp knapp--sekundar" href="#tjenester">Se våre timer</a> <!-- sekundær knapp -->
+        <p class="innledning">
+          Hvordan pust, bevegelse og tilstedeværelse kan dempe stress,
+          styrke nervesystemet og gi bedre søvn.
+        </p> <!-- kort forklaring -->
+        <div class="heltopp__knapper"> <!-- samler knappene -->
+          <a
+            class="knapp knapp--primar"
+            href="#blogg"
+          >Les artikkelen</a> <!-- primær knapp -->
+          <a
+            class="knapp knapp--sekundar"
+            href="#tjenester"
+          >Se våre timer</a> <!-- sekundær knapp -->
         </div>
       </div>
     </section>
 
-    <!-- KORTSEKSJON (3 kort i grid på større skjerm, stablet på mobil) -->
-    <section class="kortseksjon" id="tjenester"> <!-- presenterer tilbud/tema -->
-      <div class="beholder grid-kort"> <!-- grid-kort = selve griden med kort -->
-        <article class="kort"> <!-- et enkelt kort -->
-          <h3>Pust</h3> <!-- korttittel -->
-          <p>Rolige pusteøvelser (pranayama) beroliger nervesystemet og senker puls og stressnivå.</p> <!-- beskrivelse -->
-          <a href="#" class="kort__lenke">Lær enkel box-breathing</a> <!-- lenke knyttet til kortet -->
+    <!-- ==================== KORTSEKSJON ==================== -->
+    <section
+      class="kortseksjon"
+      id="tjenester"
+    > <!-- tre kort (stack → grid) -->
+      <div class="beholder grid-kort"> <!-- grid-container for kort -->
+        <article class="kort"> <!-- kort 1 -->
+          <h3>Pust</h3>
+          <p>
+            Rolige pusteøvelser (pranayama) beroliger nervesystemet
+            og senker puls og stressnivå.
+          </p>
+          <a
+            href="#"
+            class="kort__lenke"
+          >Lær enkel box-breathing</a>
         </article>
-        <article class="kort">
+
+        <article class="kort"> <!-- kort 2 -->
           <h3>Bevegelse</h3>
-          <p>Myke flytsekvenser løsner spenninger, øker sirkulasjon og forbedrer kroppskontakt.</p>
-          <a href="#" class="kort__lenke">Se rolig kveldssekvens</a>
+          <p>
+            Myke flytsekvenser løsner spenninger, øker sirkulasjon og
+            forbedrer kroppskontakt.
+          </p>
+          <a
+            href="#"
+            class="kort__lenke"
+          >Se rolig kveldssekvens</a>
         </article>
-        <article class="kort">
+
+        <article class="kort"> <!-- kort 3 -->
           <h3>Nærvær</h3>
-          <p>Mindfulness i savasana og korte skanninger roer grubling og øver opp oppmerksomhet.</p>
-          <a href="#" class="kort__lenke">Prøv 5‑min kropps­skanning</a>
+          <p>
+            Mindfulness i savasana og korte skanninger roer grubling og
+            øver opp oppmerksomhet.
+          </p>
+          <a
+            href="#"
+            class="kort__lenke"
+          >Prøv 5-min kroppsskanning</a>
         </article>
       </div>
     </section>
 
-    <!-- BLOGG + SIDEFELT (grid her, ikke på hele siden) -->
-    <section class="innhold" id="blogg"> <!-- hovedinnhold: bloggartikkel -->
-      <div class="beholder innhold__grid"> <!-- to kolonner på desktop: artikkel + sidefelt -->
+    <!-- =================== BLOGG + SIDEFELT =================== -->
+    <section
+      class="innhold"
+      id="blogg"
+    > <!-- hovedinnhold: bloggartikkel -->
+      <div class="beholder innhold__grid"> <!-- blir 2 kolonner på desktop -->
         <article> <!-- tekstkolonne -->
-          <h2>Yoga og mental helse: små vaner som gir stor effekt</h2> <!-- seksjonstittel -->
+          <h2>Yoga og mental helse: små vaner som gir stor effekt</h2>
 
-          <p><strong>Stress er en kroppslig reaksjon</strong>. Når vi er kronisk «på», blir pust overflatisk, skuldre heiser seg og søvnen lider. Yoga møter dette med tre enkle verktøy: pust, bevegelse og oppmerksomhet.</p> <!-- ingress -->
+          <p>
+            <strong>Stress er en kroppslig reaksjon</strong>.
+            Når vi er kronisk «på», blir pust overflatisk, skuldre
+            heiser seg og søvnen lider. Yoga møter dette med tre enkle
+            verktøy: pust, bevegelse og oppmerksomhet.
+          </p> <!-- ingress -->
 
-          <h3>1) Pust: nervenes fjernkontroll</h3> <!-- undertittel -->
-          <p>Langsom, jevn utpust aktiverer det parasympatiske nervesystemet – kroppens brems. Start med <em>4–4–4–4</em>: pust inn i 4, hold 4, pust ut i 4, hold 4. Gjenta 4 runder. To minutter daglig er nok til å merke ro.</p> <!-- avsnitt -->
+          <h3>1) Pust: nervenes fjernkontroll</h3>
+          <p>
+            Langsom, jevn utpust aktiverer det parasympatiske
+            nervesystemet – kroppens brems. Start med
+            <em>4–4–4–4</em>: pust inn i 4, hold 4, pust ut i 4, hold 4.
+            Gjenta 4 runder. To minutter daglig er nok til å merke ro.
+          </p>
 
           <h3>2) Bevegelse: løsne spenninger</h3>
-          <p>Rolig flyt (f.eks. kat‑ku, barnets posisjon, langsomme fremoverbøy) slipper tak i nakke/kjeve/rygg. Beveg deg i takt med pusten – <em>bevegelsen starter på utpust</em> når du vil slippe spenning.</p>
+          <p>
+            Rolig flyt (f.eks. kat-ku, barnets posisjon, langsomme
+            fremoverbøy) slipper tak i nakke/kjeve/rygg. Beveg deg i
+            takt med pusten – <em>bevegelsen starter på utpust</em>
+            når du vil slippe spenning.
+          </p>
 
           <h3>3) Nærvær: trene oppmerksomhet</h3>
-          <p>Avslutt med 3–5 min savasana. Legg merke til kontaktpunkter mot underlaget, lyder på avstand og temperaturen på pusten ved nesen. Når tankene vandrer: legg merke til det, og kom rolig tilbake.</p>
+          <p>
+            Avslutt med 3–5 min savasana. Legg merke til kontaktpunkter
+            mot underlaget, lyder på avstand og temperaturen på pusten
+            ved nesen. Når tankene vandrer: legg merke til det, og kom
+            rolig tilbake.
+          </p>
 
-          <blockquote>«Det du gir oppmerksomhet, vokser.» – Bruk yogamatta som et trygt sted å øve på dette, 10 minutter om dagen.</blockquote> <!-- kort sitat -->
+          <blockquote>
+            «Det du gir oppmerksomhet, vokser.» – Bruk yogamatta som et
+            trygt sted å øve på dette, 10 minutter om dagen.
+          </blockquote> <!-- kort sitat -->
 
           <h3>Praktisk ukesplan (forslag)</h3>
           <ul>
@@ -92,35 +183,56 @@
             <li><strong>Lørdag</strong>: 20 min rolig yoga + 5 min savasana</li>
           </ul>
 
-          <p>Det viktigste er ikke lengden, men <em>regelmessigheten</em>. Små, repeterte økter gir større effekt enn sjeldne «maraton-økter».</p>
+          <p>
+            Det viktigste er ikke lengden, men
+            <em>regelmessigheten</em>. Små, repeterte økter gir større
+            effekt enn sjeldne «maraton-økter».
+          </p>
         </article>
 
-        <aside class="sidefelt" id="kontakt"> <!-- høyre kolonne -->
-          <div class="sidefelt__boks"> <!-- sticky boks med kontaktinfo/CTA -->
-            <h3>Bestill prøvetime</h3> <!-- tittel i sidefelt -->
-            <p>Vil du prøve medisinsk yoga eller rolig flyt? Ta kontakt:</p> <!-- beskrivelse -->
-            <p>E‑post: <a href="mailto:hei@example.com">hei@example.com</a></p> <!-- epostlenke -->
-            <p>Tlf: <a href="tel:+4712345678">+47 12 34 56 78</a></p> <!-- telefonlenke -->
-            <a class="knapp knapp--primar" id="bestill" href="#">Book nå</a> <!-- primær handling i sidefelt -->
+        <aside
+          class="sidefelt"
+          id="kontakt"
+        > <!-- høyre kolonne -->
+          <div class="sidefelt__boks"> <!-- sticky boks med kontakt/CTA -->
+            <h3>Bestill prøvetime</h3>
+            <p>Vil du prøve medisinsk yoga eller rolig flyt? Ta kontakt:</p>
+            <p>
+              E-post:
+              <a href="mailto:hei@example.com">hei@example.com</a>
+            </p>
+            <p>
+              Tlf:
+              <a href="tel:+4712345678">+47 12 34 56 78</a>
+            </p>
+            <a
+              class="knapp knapp--primar"
+              id="bestill"
+              href="#"
+            >Book nå</a> <!-- primær handling -->
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- BUNNFELT -->
-    <footer class="bunnfelt"> <!-- avsnitt nederst med smålenker -->
-      <div class="beholder bunnfelt__innhold"> <!-- fleksraden i footer -->
-        <p>© <span id="ar"></span> Fredrikstad Yoga</p> <!-- dynamisk årstall -->
-        <nav class="bunnfelt__meny"> <!-- sekundærmeny -->
-          <a href="#personvern">Personvern</a> <!-- lenke til side -->
-          <a href="#vilkar">Vilkår</a> <!-- lenke til side -->
+    <!-- ======================= BUNNFELT ======================= -->
+    <footer class="bunnfelt"> <!-- nederst på siden -->
+      <div class="beholder bunnfelt__innhold"> <!-- fleksrekke -->
+        <p>
+          ©
+          <span id="ar"></span>
+          Fredrikstad Yoga
+        </p> <!-- år oppdateres i scriptet -->
+        <nav class="bunnfelt__meny"> <!-- sekundære lenker -->
+          <a href="#personvern">Personvern</a>
+          <a href="#vilkar">Vilkår</a>
         </nav>
       </div>
     </footer>
 
     <script>
-      document.getElementById('ar').textContent = new Date().getFullYear(); // setter inneværende år i footer
+      // Setter inneværende år i footer
+      document.getElementById("ar").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
-
