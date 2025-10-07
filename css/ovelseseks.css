@@ -1,0 +1,237 @@
+/* ========= Variabler ========= */
+:root{
+  --bakgrunn:#fff;
+  --tekst:#000;
+  --primar:hsl(146,66%,78%);
+  --primar-tekst:hsl(146,40%,22%);
+  --primar-hover:hsl(146,100%,34%);
+  --primar-bg2:hsl(146,90%,84%);
+  --svart:#000;
+  --hvit:#fff;
+  --radius:12px;
+  --skygge:0 4px 14px rgba(0,0,0,.2);
+}
+
+/* ========= Base ========= */
+*,*::before,*::after{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height:1.7;
+  color:var(--tekst);
+  background:var(--bakgrunn);
+}
+img{ max-width:100%; display:block; }
+a{ color:var(--primar-tekst); text-decoration:none; }
+a:hover{ color:var(--primar-hover); }
+
+/* ========= Header (flex) ========= */
+header{
+  border-bottom:3px solid var(--primar);
+  padding:12px 16px;
+}
+header nav{
+  display:flex;
+  flex-direction:column;        /* mobil: logo over meny */
+  align-items:center;
+  gap:10px;
+}
+#logo{
+  font-weight:800;
+  font-size:20px;
+  letter-spacing:-.02em;
+  color:var(--primar-tekst);
+}
+header nav ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+  display:flex;
+  flex-direction:column;        /* mobil: vertikal meny */
+  gap:6px;
+  align-items:center;
+}
+header nav a{ color:var(--tekst); }
+header nav a:hover{ color:var(--primar-hover); }
+
+/* ========= H1-seksjon (flex) ========= */
+.h1seksjon{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  background:var(--svart);
+  color:var(--hvit);
+  padding:40px 16px;
+  border-bottom:3px solid var(--primar);
+  box-shadow:var(--skygge);
+}
+.knapp{
+  display:inline-block;
+  background:var(--primar);
+  color:var(--primar-tekst);
+  border:1px solid var(--primar-tekst);
+  border-radius:var(--radius);
+  padding:10px 16px;
+  font-weight:600;
+}
+.knapp:hover{ background:var(--primar-bg2); }
+
+/* ========= ALT UNDER H1 = GRID (mobil først) ========= */
+.grid-innhold{
+  display:grid;
+  grid-template-columns: 1fr;     /* mobil: én kolonne */
+  gap:20px;
+  padding:20px;
+}
+
+/* Kortsekjson: indre grid */
+.cards{
+  display:grid;
+  gap:16px;
+  grid-template-columns: 1fr;     /* mobil: ett kort per rad */
+}
+.card{
+  background:var(--hvit);
+  color:var(--tekst);
+  border:1px solid var(--primar-tekst);
+  border-radius:var(--radius);
+  box-shadow:var(--skygge);
+  padding:16px;
+  display:flex;
+  flex-direction:column;          /* bilde -> tittel -> tekst -> knapp */
+  gap:10px;
+  text-align:center;
+}
+
+.card figure{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+.card img{
+    display:block;
+    border-radius: 5px;
+    box-shadow: var(--skygge);
+    max-width: 100%;
+    height: auto;
+}
+.card:nth-child(odd){ background:var(--primar-bg2); }
+
+/* Tjenester: indre grid */
+#tjenester{
+  display:grid;
+  gap:16px;
+  grid-template-columns: 1fr;     /* mobil: én kolonne */
+  padding:8px 0;
+}
+#tjenester > h2{
+  margin:0;
+  text-align:center;
+}
+#tjenester article{
+  background:var(--hvit);
+  border:1px solid var(--primar-tekst);
+  border-radius:var(--radius);
+  box-shadow:var(--skygge);
+  padding:16px;
+}
+#tjenester #booking{ border-color:var(--primar-hover); }
+
+/* Footer */
+/* =========================================
+   FOOTER (sort)
+========================================= */
+
+footer{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  background: var(--svart);
+  color: var(--hvit);
+  padding: 32px 16px;
+  border-top: 3px solid var(--primar);
+}
+
+#footer-logo{
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  color: var(--hvit);
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+/* Footer-seksjoner */
+footer section{
+  min-width: 260px;
+}
+
+/* Lister i footer */
+footer ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+footer ul li{
+  padding: 8px 0;
+}
+
+/* Footer lenker */
+footer a{ color: var(--hvit); }
+footer a:hover{
+  color: var(--primar);
+  text-decoration: underline;
+  text-decoration-color: var(--primar);
+  text-underline-offset: 3px;
+}
+
+
+/* ========= DESKTOP (≥900px) – legges alltid nederst ========= */
+@media (min-width: 900px){
+
+  /* Header: vannrett meny */
+  header nav{ flex-direction:row; justify-content:space-between; }
+  header nav ul{ flex-direction:row; gap:20px; }
+
+  /* Hovedgrid: 4 kolonner */
+  .grid-innhold{
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* Cards fyller hele bredden, men viser 3 per rad inni seg */
+  .cards{
+    grid-column: 1 / 5;                        /* strekker seg over alle 4 kolonner */
+    grid-template-columns: repeat(3, 1fr);      /* 3 kort per rad */
+  }
+
+  /* Tjenester fyller hele bredden og viser 3 per rad */
+  #tjenester{
+    grid-column: 1 / 5;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+ #tjenester>h2{
+    grid-column: 1/5;
+    text-align: center;
+    padding: 10px;
+
+
+  }
+
+  /*
+
+  footer>.generelt
+  }*/
+
+  /* Du kan enkelt plassere nye seksjoner med tall:
+     .noe { grid-column: 1 / 3; }  osv. */
+}
+

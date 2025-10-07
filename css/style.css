@@ -1,317 +1,421 @@
-/* === GLOBALT ================================ */
 
-/* Setter box-sizing til border-box for alle elementer:
-   - HVA: Inkluderer padding + border i beregning av bredde/høyde.
-   - HVORFOR: Gjør layout enklere og mer forutsigbar. */
-* { 
-  box-sizing: border-box;
+
+/* =========================================
+   style.css – layout som "Yoga for et roligere sinn"
+   Flex i toppen (header/hero), Grid under
+   Mobil først (burger), px-verdier
+========================================= */
+
+/* ---------- Variabler (yogapalett) ---------- */
+:root {
+  --bakgrunn:   #ffffff;
+  --tekst:      #0b1b16;
+  --dempet:     hsl(210, 10%, 40%);
+
+  --primar:       hsl(146, 66%, 78%);
+  --primar-tekst: hsl(146, 40%, 18%);
+  --primar-hover: hsl(146, 66%, 72%);
+
+  --kompl:      hsl(326, 30%, 88%);
+  --lys-aksent: hsl(146, 40%, 96%);
+  --ramme:      hsl(210, 16%, 88%);
+
+  --radius:     20px;
+  --skygge:     0 8px 24px rgba(0,0,0,.06);
+  --maksbredde: 1120px;
 }
 
-/* HTML og body (grunnoppsett for hele siden) */
+/* ---------- Reset + base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
 html, body {
-  margin: 0; /* Fjerner standardmargin */
-  padding: 0; /* Fjerner standardpadding */
-  background-color: #000000; /* Setter bakgrunnsfarge til svart */
-  color: #ffffff; /* Setter tekstfarge til hvit */
-  font-family: Arial, sans-serif; /* Standard font */
-  line-height: 1.6; /* Bedre lesbarhet */
-  font-size: calc(1em + 1vw); /* Dynamisk skriftstørrelse: vokser med viewport-bredden */
+  height: 100%;
+  margin: 0;
 }
 
-/* Standard lenker */
+body {
+  /* Sticky footer-oppsett */
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial;
+  font-size: 16px;
+  line-height: 1.7;
+
+  color: var(--tekst);
+  background: var(--bakgrunn);
+}
+
+img { max-width: 100%; display: block; }
+
 a {
-  color: hsl(146, 52%, 72%); /* Lys grønn lenkefarge */
-  text-decoration: none; /* Fjerner understrek */
+  color: var(--primar-tekst);
+  text-decoration: underline;
+  text-decoration-color: var(--primar);
+  text-underline-offset: 3px;
 }
-a:hover {
-  color: #17ce11; /* Endrer farge ved hover */
+a:hover { color: var(--primar-hover); }
+
+/* ---------- Hjelpeklasser ---------- */
+.beholder {
+  width: min(calc(100% - 32px), var(--maksbredde));
+  margin-inline: auto;
 }
 
-/* === GRID LAYOUT ============================= */
-
-/* Mobil først: en kolonne-layout */
-.layout {
-  display: grid; /* Aktiverer CSS Grid */
-  grid-template-columns: 1fr; /* Én kolonne */
-  grid-auto-rows: minmax(100px, auto); /* Rader blir minst 100px, men kan vokse */
-  grid-template-areas:
-    "header"
-    "hero"
-    "ck"
-    "cp"
-    "co"
-    "aside"
-    "footer"; /* Definerer rekkefølgen på mobil */
-  gap: 0; /* Ingen mellomrom mellom seksjoner */
-  padding: 16px; /* Luft rundt innholdet */
+.knapp {
+  display: inline-block;
+  padding: 14px 18px;
+  border-radius: 14px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
 }
 
-/* Wrapper rundt kortene: display: contents fjerner "ekstra div" 
-   - slik at artiklene blir direkte grid-barn */
-.cards { 
-  display: contents; 
+.knapp--primar {
+  background: var(--primar);          /* (fikset) var(--bakgrunn) -> var(--primar) */
+  color: var(--primar-tekst);
+  border-color: rgba(0,0,0,.12);
+}
+.knapp--primar:hover { background: var(--primar-hover); }
+
+.knapp--sekundar {
+  background: #fff;
+  color: var(--primar-tekst);
+  border-color: var(--ramme);
 }
 
-/* Kobler seksjoner til grid-områdene */
-header { grid-area: header; }
-.hero { grid-area: hero; }
-.cardkontakt { grid-area: ck; }
-.cardstudieplan { grid-area: cp; }
-.cardoversikt { grid-area: co; }
-aside { grid-area: aside; }
-footer { grid-area: footer; }
-
-/* Fjern ekstra margin på kort i grid */
-.card{ margin: 0; }
-
-/* Header og footer har ikke margin (skal gå i kantene) */
-header, footer { margin: 0; }
-
-/* === HEADER ================================ */
-header {
-  display: flex; /* Bruker flexbox for logo + meny */
-  justify-content: space-between; /* Plasser logo til venstre og meny til høyre */
-  align-items: center; /* Sentrerer vertikalt */
-  flex-wrap: nowrap; /* Hindrer at elementer bryter linjen */
-  background: #000; /* Svart bakgrunn */
-  color: #fff; /* Hvit tekst */
-  padding: 12px 16px; /* Luft rundt innhold */
-  border-bottom: 1px solid #333; /* Tynn linje nederst */
-  font-size: 15px; /* Tekststørrelse */
-  font-weight: bold; /* Fet skrift */
-  top: 0;
-  position: relative; /* Kan brukes til posisjonering senere */
-}
-
-/* Logoen */
-header h3 { 
-  margin: 0; /* Ingen ekstra luft */
-  font-size: 1rem; /* Størrelse */
-  letter-spacing: .06em; /* Litt avstand mellom bokstaver */
-}
-header h3 a { 
-  color: #e8decf; /* Lys beige tekst på logo */
-}
-
-/* Logo-ikonet (Font Awesome ikon) */
-.logo a {
-  display: inline-flex;      /* gjør at ikon og tekst ligger på linje */
-  align-items: center;       /* vertikal sentrering */
-  gap: 8px;                  /* mellomrom mellom ikon og tekst */
-  text-decoration: none;     /* fjerner understrek */
-  color: #fff;               /* hvit tekst */
-  font-weight: bold;         /* gjør teksten sterkere */
-  font-size: 1.2rem;         /* større enn default */
-}
-
-.logo i {
-  font-size: 28px;           /* størrelse på ikonet */
-  color: #fff;
-}
-
-.logo-text {
-  font-size: 1.2rem;
-}
-
-.logo .tagline {
-  display: block;            /* plasseres under */
-  font-size: 0.85rem;        /* mindre tekst */
-  color: #ccc;               /* grå for mindre kontrast */
-  margin-top: 2px;
-}
-
-/* Navigasjon */
-nav ul {
-  list-style: none; /* Fjerner punktmerking */
-  margin: 0; /* Null margin */
-  padding: 6px 0; /* Litt luft opp/ned */
-  display: flex; /* Horisontal meny */
-  flex-direction: row; /* Ekspisitt rad */
-  gap: 20px; /* Avstand mellom lenker */
-  align-items: center; /* Sentrerer i høyden */
-}
-nav ul li a {
-  color: #fff; /* Hvit tekst */
-  font-size: 15px; /* Tekststørrelse */
-  font-weight: bold; /* Fet */
-  padding: 10px; /* Klikkeflate */
-  border-radius: 8px; /* Runde hjørner */
-  text-decoration: none; /* Ingen understrek */
-  display: inline-block; /* Gir padding effekt */
-}
-nav ul li a:hover {
-  background-color: hsla(0,0%,100%,.08); /* Halvtransparent bakgrunn */
-  color: hsl(146, 52%, 72%); /* Endrer tekstfarge */
-  box-shadow: 0 0 10px hsla(146, 52%, 72%, 0.29); /* Grønn glød */
-}
-
-/* === MAIN / KORT =========================== */
-main { 
-  padding: 16px; /* Luft rundt hovedinnhold */
-}
-
-.card {
-  background-color: hsl(146, 52%, 72%); /* Grønn boks */
-  border: 2px solid #000000e0; /* Svart kant */
-  border-radius: 12px; /* Runde hjørner */
-  padding: 20px; /* Luft inni */
-  margin: 10px 0; /* Luft utenfor */
-  box-shadow: 0 8px 24px rgba(0,0,0,.34); /* Skygge */
-  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; /* Smooth overgang */
-}
-.card:hover {
-  transform: translateY(-4px); /* Løfter kortet */
-  box-shadow: 0 12px 28px rgba(0,0,0,.25); /* Dypere skygge */
-  border-color: #0000009b; /* Fremhevet kant */
-}
-.card h2 {
-  margin-top: 0; /* Ingen luft på toppen */
-  color: #000; /* Svart tittel */
-}
-.card p { 
-  color: #000; /* Svart tekst */
-}
-
-/* Lenker inni artikler */
-article a { color:#000000; text-decoration: underline;}
-article a:hover { color:#000000; border-bottom: 3px solid hsl(146, 100%, 40%); text-decoration: none;}
-
-/* Seksjons-header i main */
-main > header {
-  border-bottom: 2px solid #fff;
-  margin: 0 0 12px 0;
-  padding-bottom: 6px;
-  background-size: cover;
-}
-
-/* === HERO ================================== */
-.hero {
-  position: relative; /* For gradientlag */
-  height: 300px; /* Høyde på hero */
-  display: flex; 
-  justify-content: center;
+.merkelapp {
+  display: inline-flex;
   align-items: center;
-  text-align: center;
-  background-image: url("https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8");
-  background-size: cover; /* Dekker hele */
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.hero::before {
-  content: ""; /* Lager et ekstra lag */
-  position: absolute;
-  inset: 0; /* Fyller hele hero */
-  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.3)); /* Gradient */
-  z-index: 1; /* Ligger under tekst */
-}
-.hero-content {
-  position: relative;
-  z-index: 2; /* Tekst over gradient */
-  color: #fff;
+  gap: 8px;
+
+  padding: 6px 12px;
+  border-radius: 9999px;
+
+  background: var(--lys-aksent);
+  color: var(--primar-tekst);
+  font-size: 15px;
 }
 
-/* === ASIDE ================================ */
-aside {
-  color: #000; /* Svart tekst */
-  border: 1px solid #000;
-  border-radius: 12px;
-  padding: 20px; /* Luft inni */
-  margin: 16px; /* Luft utenfor */
-  background-color: hsl(0, 0%, 100%); /* Lilla boks */
-}
-aside h3 { color: #000; margin-top: 0; }
-aside a { color:#111; text-decoration: underline; }
-aside a:hover { color: hsl(0, 0%, 0%);  border-bottom: 3px solid hsl(146, 52%, 72%); text-decoration: none;}
+/* =========================================
+   HEADER (sticky) + burger (checkbox-hack)
+========================================= */
 
-/* === FOOTER ================================ */
-footer {
-  background: #000; /* Svart */
-  color: #fff; /* Hvit tekst */
-  padding: 10px; /* Luft inni */
-  border-top: 1px solid #333; /* Skillelinje */
-  position: relative;
-  z-index: 0;
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 16px;
+
+  background: rgba(255,255,255,.92);
+  backdrop-filter: saturate(160%) blur(8px);
+  border-bottom: 1px solid var(--ramme);
 }
-footer form {
-  display: grid; /* Skjemafeltene i grid */
-  gap: 2px; /* Mellomrom mellom feltene */
-  max-width: 640px; /* Bredden begrenses */
+
+.logo {
+  margin: 0;
+  display: grid;  /* tagline under */
+  gap: 2px;
 }
-footer label {
+.logo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--primar-tekst);
+  text-decoration: none;
+  font-weight: 800;
+}
+.logo .tagline { font-size: 13px; color: var(--dempet); }
+
+/* Skjult checkbox som holder "åpen/lukket"-state */
+.nav-toggle { position: absolute; left: -9999px; }
+
+/* Burger (label koblet til input) */
+.burger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 5px;
+
+  padding: 6px;
+  border-radius: 8px;
+
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+}
+.burger:hover { background: #f8fafc; }
+.burger:focus-visible { outline: 2px solid var(--primar); }
+.burger span {
+  width: 26px;
+  height: 3px;
   display: block;
-  font-weight: bold;
-  color: #fff;
-}
-footer input[type="text"],
-footer input[type="email"],
-footer textarea {
-  width: 100%; /* Fyll bredden */
-  padding: 12px;
-  border: 1px solid #fff;
-  border-radius: 10px;
-  background: #1d1d1d; /* Mørk bakgrunn */
-  color: #f5f5f5; /* Lys tekst */
-}
-footer textarea {
-  min-height: 120px; /* Gjør det stort nok */
-  resize: vertical; /* Lar brukeren dra i høyden */
+  background: var(--primar-tekst);
+  border-radius: 2px;
 }
 
-/* Knapp */
-.btn {
+/* Mobilmeny (dropdown-panel under header) */
+.nav {
+  position: fixed;
+  inset: 64px 0 auto 0;
+
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+
+  background: #fff;
+  border-bottom: 1px solid var(--ramme);
+  padding: 16px;
+}
+
+/* Åpne når checkbox er krysset */
+#nav-toggle:checked ~ .nav { display: flex; }
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.nav a {
+  padding: 8px 10px;
+  border-radius: 8px;
+
+  text-decoration: none;
+  color: var(--primar-tekst);
+  font-weight: 600;
+}
+.nav a:hover,
+.nav a:focus-visible { background: var(--lys-aksent); }
+
+/* Desktop: horisontal meny, burger skjules */
+@media (min-width: 769px) {
+  .burger { display: none; }
+
+  .nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+  .nav ul { flex-direction: row; gap: 12px; }
+}
+
+/* =========================================
+   HERO (heltopp) – stort bilde med slør
+========================================= */
+
+.heltopp {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 360px;
+
+  background:
+    url("https://fastly.picsum.photos/id/180/2400/1600.jpg?hmac=Ig-CXcpNdmh51k3kXpNqNqcDYTwXCIaonYiBOnLXBb8")
+    center / cover no-repeat;
+
+  border-bottom: 1px solid var(--ramme);
+}
+.heltopp::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+
+  background: linear-gradient(rgba(0,0,0,.22), rgba(0,0,0,.18));
+  backdrop-filter: blur(2px);
+}
+.heltopp__innhold { position: relative; z-index: 1; padding: 48px 0; }
+.heltopp h1 {
+  margin: 8px 0 16px;
+  font-size: 40px;
+  line-height: 1.15;
+  color: #fff;
+}
+.innledning { color: #f8fafc; max-width: 60ch; }
+.heltopp__knapper { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 14px; }
+
+/* =========================================
+   KORTSEKSJON – hvite kort i grid
+========================================= */
+
+.kortseksjon { background: var(--bakgrunn); }
+
+.grid-kort {
+  display: grid;
+  gap: 16px;
+  padding: 24px 0;
+}
+
+.kort {
+  background: #fff;
+  border: 1px solid var(--ramme);
+  border-radius: var(--radius);
+  box-shadow: var(--skygge);
+  padding: 20px;
+}
+.kort h3 { margin: 4px 0 8px; font-size: 18px; color: var(--primar-tekst); }
+.kort p  { color: var(--dempet); }
+.kort__lenke {
+  display: inline-block;
+  margin-top: 12px;
+  font-weight: 600;
+  color: var(--primar-tekst);
+  text-decoration: underline;
+  text-decoration-color: var(--primar);
+}
+
+.sidefelt { position: relative; }
+
+.sidefelt__boks {
+  position: sticky;
+  top: 88px;
+
+  display: grid;
+
+  padding: 20px;                           /* (fikset) la til padding som manglet */
+  background: var(--lys-aksent);
+  border: 1px solid var(--ramme);
+  border-radius: var(--radius);
+  box-shadow: var(--skygge);
+  margin: 0;
+}
+
+/* =========================================
+   FOOTER – "WEBUTVIKLING"-variant (full bredde)
+   Flex-layout, dekker alltid bunnen
+========================================= */
+
+.footer {
+  margin-top: auto;            /* skyver footeren til bunnen ved lite innhold */
+  width: 100%;
+
+  background: #0b1b16;
+  color: #ffffff;
+
+  padding: 24px 16px;
+  border-top: 1px solid var(--ramme);
+}
+
+.footer .beholder {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Venstre kolonne: tittel + kontaktinfo */
+.footer .meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.footer .meta h2 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+}
+
+/* Skjema */
+.footer form {
+  display: grid;
+  gap: 8px;
+  max-width: 640px;
+}
+.footer label { display: block; font-weight: 600; }
+.footer input,
+.footer textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2a3b33;
+  background: #111e1a;
+  color: #f5f5f5;
+}
+.footer textarea { min-height: 120px; resize: vertical; }
+.footer a { color: var(--bakgrunn); }
+
+/* Knapp i footer */
+.footer .btn {
   display: inline-block;
   padding: 12px 16px;
   border-radius: 12px;
+  background: var(--primar);
+  color: var(--primar-tekst);
   font-weight: bold;
-  text-transform: uppercase;
+  border: none;
   cursor: pointer;
-  background: #000;
-  color: #e8decf; /* Beige tekst */
-  border: 1px solid #fff;
-  transition: background-color .15s, color .15s, transform .08s;
+  transition: background-color .15s ease, transform .08s ease;
 }
-.btn:hover {
-  background: hsl(146, 52%, 72%);
-  color: #000;
-  transform: translateY(-1px); /* Løfter knappen */
-  animation: pulse .6s infinite alternate;
+.footer .btn:hover {
+  background: var(--primar-hover);
+  transform: translateY(-1px);
 }
-@keyframes pulse {
-  from { transform: scale(1); }
-  to   { transform: scale(1.05); }
-}
-.btn:active { transform: translateY(0); }
 
-/* === DESKTOP (≥900px): Oppsett med 3 kolonner */
+/* Bunnlinje */
+.footer .bunnlinje {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 12px;
+  border-top: 1px solid #20322c;
+
+  color: #cbd5d1;
+}
+.footer .bunnlinje a {
+  color: #d7efe6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* 2 kolonner fra 640px, 3 fra 900px */
+@media (min-width: 640px) {
+  .grid-kort { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 @media (min-width: 900px) {
-  .layout {
-    grid-template-columns: 1fr 1fr 320px; /* To like brede kolonner + en smalere til aside */
-    grid-auto-columns: minmax(100px, auto);
-    grid-template-areas:
-      "header header header"
-      "hero   hero   hero"
-      "ck     cp     aside"
-      "co     co     aside"
-      "footer footer footer";
-    gap: 16px;
-    align-self: center;
-  }
-
-  html, body {
-    font-size: 18px;
-  }
-
-  .hero-content{
-    font-size: 35px;
-  }
-
-  h1 h2 { font-size: 22px;} 
-
-
-
-  .cardoversikt { align-items: start; }
-  .card { margin: 0; } /* Fjerner margin (vi bruker gap i stedet) */
-
-  /* Gjør aside sticky: følger med ved scroll */
-  aside { position: sticky; top: 16px; align-self: start; }
+  .grid-kort { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
+
+/* =========================================
+   INNHOLD + SIDEFELT – grid m/ sticky boks
+========================================= */
+
+.innhold__grid {
+  display: grid;
+  gap: 20px;
+  padding: 24px 0;
+}
+@media (min-width: 900px) {
+  .innhold__grid { grid-template-columns: 1fr 320px; } /* tekst + smal sidebar */
+}
+
+/* Footer responsiv */
+@media (min-width: 900px) {
+  .footer .beholder {
+    flex-direction: row;   /* meta + skjema ved siden av hverandre */
+    align-items: flex-start;
+  }
+  .footer .meta { flex: 1 1 320px; }
+  .footer form { flex: 1 1 480px; }
+} 
