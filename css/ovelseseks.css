@@ -1,237 +1,271 @@
 /* ========= Variabler ========= */
+/* Brukes overalt via var() for konsistente farger/spacing */
 :root{
-  --bakgrunn:#fff;
-  --tekst:#000;
-  --primar:hsl(146,66%,78%);
-  --primar-tekst:hsl(146,40%,22%);
-  --primar-hover:hsl(146,100%,34%);
-  --primar-bg2:hsl(146,90%,84%);
-  --svart:#000;
-  --hvit:#fff;
-  --radius:12px;
-  --skygge:0 4px 14px rgba(0,0,0,.2);
+  --bakgrunn: #fff;                 /* sidebakgrunn (lys) */
+  --tekst: #000;                    /* standard tekstfarge (kontrast mot hvit) */
+  --primar: hsl(146,66%,78%);       /* hovedgrønn (brand) */
+  --primar-tekst: hsl(146,40%,22%); /* mørk grønn for tekst/rammer */
+  --primar-hover: hsl(146,100%,34%);/* sterk grønn ved hover */
+  --primar-bg2: hsl(146,90%,84%);   /* lys grønn bakgrunnsvariant */
+  --svart: #000;                    /* dyp bakgrunn (hero/footer) */
+  --hvit: #fff;                     /* hvit bakgrunn */
+  --radius: 12px;                   /* runde hjørner på komponenter */
+  --skygge: 0 4px 14px rgba(0,0,0,.2); /* myk skygge for dybde */
 }
 
 /* ========= Base ========= */
-*,*::before,*::after{ box-sizing:border-box; }
-html,body{ margin:0; padding:0; }
-body{
-  font-family:system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-  line-height:1.7;
-  color:var(--tekst);
-  background:var(--bakgrunn);
+*, *::before, *::after{
+  box-sizing: border-box;           /* inkluderer padding+border i width/height */
 }
-img{ max-width:100%; display:block; }
-a{ color:var(--primar-tekst); text-decoration:none; }
-a:hover{ color:var(--primar-hover); }
+html, body{
+  margin: 0;                        /* fjerner default marg */
+  padding: 0;                       /* fjerner default padding */
+}
+body{
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* systemfont: rask/lesbar */
+  line-height: 1.7;                 /* luftig tekstlinje */
+  color: var(--tekst);              /* setter tekstfarge globalt */
+  background: var(--bakgrunn);      /* setter bakgrunn globalt */
+}
+img{
+  max-width: 100%;                  /* skalerer ned i små containere */
+  display: block;                   /* fjerner inline-gap under bilder */
+}
+a{
+  color: var(--primar-tekst);       /* lenkefarge (mørk grønn) */
+  text-decoration: none;            /* fjerner understrek som standard */
+}
+a:hover{
+  color: var(--primar-hover);       /* tydeligere grønn på hover */
+}
 
 /* ========= Header (flex) ========= */
+/* Layout: på mobil står logo over meny (kolonne). På desktop gjøres dette om i media query. */
 header{
-  border-bottom:3px solid var(--primar);
-  padding:12px 16px;
+  border-bottom: 3px solid var(--primar); /* grønn linje under header */
+  padding: 12px 16px;                     /* luft rundt innholdet */
 }
 header nav{
-  display:flex;
-  flex-direction:column;        /* mobil: logo over meny */
-  align-items:center;
-  gap:10px;
+  display: flex;                           /* aktiverer flex-layout */
+  flex-direction: column;                  /* legger barna (logo + ul) i kolonne på mobil */
+  align-items: center;                     /* senterer innhold horisontalt */
+  gap: 10px;                               /* avstand mellom logo og meny */
 }
 #logo{
-  font-weight:800;
-  font-size:20px;
-  letter-spacing:-.02em;
-  color:var(--primar-tekst);
+  font-weight: 800;                        /* kraftig typografi */
+  font-size: 20px;                         /* litt større logo */
+  letter-spacing: -.02em;                  /* litt tettere bokstaver */
+  color: var(--primar-tekst);              /* mørk grønn logo */
 }
 header nav ul{
-  list-style:none;
-  margin:0;
-  padding:0;
-  display:flex;
-  flex-direction:column;        /* mobil: vertikal meny */
-  gap:6px;
-  align-items:center;
+  list-style: none;                        /* fjerner bullets */
+  margin: 0;                               /* nuller marg */
+  padding: 0;                              /* nuller padding */
+  display: flex;                           /* flex også på lista */
+  flex-direction: column;                  /* vertikal meny på mobil */
+  gap: 6px;                                /* avstand mellom lenker */
+  align-items: center;                     /* senterer lenkene */
 }
-header nav a{ color:var(--tekst); }
-header nav a:hover{ color:var(--primar-hover); }
+header nav a{
+  color: var(--tekst);                     /* sort tekst i header */
+}
+header nav a:hover{
+  color: var(--primar-hover);              /* grønn hover for meny */
+}
 
 /* ========= H1-seksjon (flex) ========= */
+/* Layout: kolonne, midtstilt tekst/innhold, mørk bakgrunn som hero. */
 .h1seksjon{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  text-align:center;
-  background:var(--svart);
-  color:var(--hvit);
-  padding:40px 16px;
-  border-bottom:3px solid var(--primar);
-  box-shadow:var(--skygge);
+  display: flex;                           /* aktiverer flex */
+  flex-direction: column;                  /* stablet innhold (h1, p, knapp) */
+  align-items: center;                     /* horisontal sentrering */
+  text-align: center;                      /* senter tekstlinjer */
+  background: var(--svart);                /* mørk bakgrunn for kontrast */
+  color: var(--hvit);                      /* hvit tekst på mørk bakgrunn */
+  padding: 40px 16px;                      /* luft rundt hero-innhold */
+  border-bottom: 3px solid var(--primar);  /* brand-aksent nederst */
+  box-shadow: var(--skygge);               /* subtil dybde */
 }
 .knapp{
-  display:inline-block;
-  background:var(--primar);
-  color:var(--primar-tekst);
-  border:1px solid var(--primar-tekst);
-  border-radius:var(--radius);
-  padding:10px 16px;
-  font-weight:600;
+  display: inline-block;                   /* lar padding/margin virke som knapp */
+  background: var(--primar);               /* grønn bakgrunn */
+  color: var(--primar-tekst);              /* mørk grønn tekst */
+  border: 1px solid var(--primar-tekst);   /* matchende kant */
+  border-radius: var(--radius);            /* runde hjørner */
+  padding: 10px 16px;                      /* klikkflate */
+  font-weight: 600;                         /* tydelig knappetekst */
 }
-.knapp:hover{ background:var(--primar-bg2); }
+.knapp:hover{
+  background: var(--primar-bg2);           /* lysere grønn ved hover */
+}
 
 /* ========= ALT UNDER H1 = GRID (mobil først) ========= */
+/* Layout: én kolonne som standard. Seksjoner kan spennes over flere kolonner i desktop-varianten. */
 .grid-innhold{
-  display:grid;
-  grid-template-columns: 1fr;     /* mobil: én kolonne */
-  gap:20px;
-  padding:20px;
+  display: grid;                           /* aktiverer grid-layout */
+  grid-template-columns: 1fr;              /* én kolonne på mobil */
+  gap: 20px;                               /* mellomrom mellom seksjoner */
+  padding: 20px;                           /* sidepadding */
 }
 
-/* Kortsekjson: indre grid */
+/* ========= Kortseksjon (indre grid) ========= */
+/* Layout: kort vises ett-per-rad på mobil. Økes i desktop i media query. */
 .cards{
-  display:grid;
-  gap:16px;
-  grid-template-columns: 1fr;     /* mobil: ett kort per rad */
+  display: grid;                           /* grid for kortene */
+  gap: 16px;                               /* mellomrom mellom kort */
+  grid-template-columns: 1fr;              /* ett kort per rad (mobil) */
 }
 .card{
-  background:var(--hvit);
-  color:var(--tekst);
-  border:1px solid var(--primar-tekst);
-  border-radius:var(--radius);
-  box-shadow:var(--skygge);
-  padding:16px;
-  display:flex;
-  flex-direction:column;          /* bilde -> tittel -> tekst -> knapp */
-  gap:10px;
-  text-align:center;
+  background: var(--hvit);                 /* hvit kortflate */
+  color: var(--tekst);                     /* sort tekst */
+  border: 1px solid var(--primar-tekst);   /* tynn grønn kant */
+  border-radius: var(--radius);            /* runde hjørner */
+  box-shadow: var(--skygge);               /* skygge for dybde */
+  padding: 16px;                           /* innvendig luft */
+  display: flex;                           /* flex til innholdet i kortet */
+  flex-direction: column;                  /* bilde → tittel → tekst → knapp */
+  gap: 10px;                               /* avstand mellom elementene i kortet */
+  text-align: center;                      /* senterer tekst i kortet */
 }
-
 .card figure{
-    display: flex;
-    justify-content: center;
-    margin: 0;
+  display: flex;                           /* flex for enklere sentrering av bildet */
+  justify-content: center;                 /* senterer bildet horisontalt */
+  margin: 0;                               /* fjerner default figure-margin */
 }
-
 .card img{
-    display:block;
-    border-radius: 5px;
-    box-shadow: var(--skygge);
-    max-width: 100%;
-    height: auto;
+  display: block;                          /* fjerner inline-gap */
+  border-radius: 5px;                      /* litt avrunding på bilde */
+  box-shadow: var(--skygge);               /* subtil skygge på bilde */
+  max-width: 100%;                         /* aldri bredere enn container */
+  height: auto;                            /* bevarer bildeforhold */
 }
-.card:nth-child(odd){ background:var(--primar-bg2); }
+.card:nth-child(odd){
+  background: var(--primar-bg2);           /* annenhver kort med lys grønn bakgrunn */
+}
 
-/* Tjenester: indre grid */
+/* ========= Tjenester (indre grid) ========= */
+/* Layout: én kolonne og luft. Skaleres opp i desktop for flere kolonner. */
 #tjenester{
-  display:grid;
-  gap:16px;
-  grid-template-columns: 1fr;     /* mobil: én kolonne */
-  padding:8px 0;
+  display: grid;                           /* grid for tjenestekort */
+  gap: 16px;                               /* mellomrom mellom elementer */
+  grid-template-columns: 1fr;              /* én kolonne på mobil */
+  padding: 8px 0;                          /* vertikal luft */
 }
 #tjenester > h2{
-  margin:0;
-  text-align:center;
+  margin: 0;                               /* stram overskrift */
+  text-align: center;                      /* senterer tittel */
 }
 #tjenester article{
-  background:var(--hvit);
-  border:1px solid var(--primar-tekst);
-  border-radius:var(--radius);
-  box-shadow:var(--skygge);
-  padding:16px;
+  background: var(--hvit);                 /* hvit kortflate */
+  border: 1px solid var(--primar-tekst);   /* grønn kant */
+  border-radius: var(--radius);            /* runde hjørner */
+  box-shadow: var(--skygge);               /* dybde */
+  padding: 16px;                           /* innvendig luft */
 }
-#tjenester #booking{ border-color:var(--primar-hover); }
+#tjenester #booking{
+  border-color: var(--primar-hover);       /* tydeligere ramme for “booking” */
+}
 
-/* Footer */
-/* =========================================
-   FOOTER (sort)
-========================================= */
-
+/* ========= FOOTER (GRID-VERSJON) ========= */
+/* Layout: to rader – logo på egen rad, seksjons-grid under. Sentrert på mobil. */
 footer{
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-
-  background: var(--svart);
-  color: var(--hvit);
-  padding: 32px 16px;
-  border-top: 3px solid var(--primar);
+  background: var(--svart);                /* mørk bakgrunn */
+  color: var(--hvit);                      /* lys tekst */
+  padding: 40px 16px;                      /* romslig luft */
+  border-top: 3px solid var(--primar);     /* grønn topplinje */
+  display: grid;                           /* grid-layout i footer */
+  grid-template-rows: auto auto;           /* rad 1: logo, rad 2: seksjoner */
+  justify-items: center;                   /* senterer alle barn horisontalt */
+  gap: 24px;                               /* avstand mellom logo og seksjoner */
 }
-
 #footer-logo{
-  width: 100%;
-  text-align: center;
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: -2px;
-  color: var(--hvit);
-  text-decoration: none;
-  margin-bottom: 8px;
+  text-align: center;                      /* senter logo-tekst */
+  font-size: 24px;                         /* større logo */
+  font-weight: 900;                        /* kraftig typografi */
+  letter-spacing: -2px;                    /* kompakt uttrykk */
+  color: var(--hvit);                      /* hvit logo */
+  text-decoration: none;                   /* ingen understrek */
 }
-
-/* Footer-seksjoner */
-footer section{
-  min-width: 260px;
+.footer-grid{
+  display: grid;                           /* grid for seksjoner i footer */
+  grid-template-columns: 1fr;              /* én kolonne på mobil */
+  gap: 32px;                               /* avstand mellom seksjoner */
+  width: 100%;                             /* fyll tilgjengelig bredde */
+  max-width: 1000px;                       /* begrenser linjelengde */
 }
-
-/* Lister i footer */
+.footer-grid section{
+  text-align: center;                      /* midtstilt tekst på mobil */
+  min-width: 260px;                        /* unngå for smale kolonner */
+}
 footer ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  list-style: none;                        /* fjerner bullets */
+  margin: 0;                               /* nuller margin */
+  padding: 0;                              /* nuller padding */
 }
 footer ul li{
-  padding: 8px 0;
+  padding: 8px 0;                          /* vertikal avstand mellom punkter */
 }
-
-/* Footer lenker */
-footer a{ color: var(--hvit); }
+footer a{
+  color: var(--hvit);                      /* hvite lenker i footer */
+}
 footer a:hover{
-  color: var(--primar);
-  text-decoration: underline;
-  text-decoration-color: var(--primar);
-  text-underline-offset: 3px;
+  color: var(--primar);                    /* grønn hover */
+  text-decoration: underline;              /* understrek ved hover */
+  text-decoration-color: var(--primar);    /* matchende grønn strek */
+  text-underline-offset: 3px;              /* litt luft til understrek */
 }
 
-
-/* ========= DESKTOP (≥900px) – legges alltid nederst ========= */
+/* ========= DESKTOP (≥900px) ========= */
+/* Layout-oppskalering: header blir horisontal, og grid-områder får flere kolonner. */
 @media (min-width: 900px){
 
-  /* Header: vannrett meny */
-  header nav{ flex-direction:row; justify-content:space-between; }
-  header nav ul{ flex-direction:row; gap:20px; }
+  /* Header/nav horisontal */
+  header nav{
+    flex-direction: row;                   /* logo og meny på rad */
+    justify-content: space-between;        /* rom mellom logo og ul */
+  }
+  header nav ul{
+    flex-direction: row;                   /* horisontal meny */
+    gap: 20px;                             /* avstand mellom lenker */
+  }
 
-  /* Hovedgrid: 4 kolonner */
+  /* Hovedinnhold i 4 kolonner */
   .grid-innhold{
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr); /* 4 like brede kolonner */
   }
 
-  /* Cards fyller hele bredden, men viser 3 per rad inni seg */
+  /* Kortseksjon over hele bredden, 3 kolonner internt */
   .cards{
-    grid-column: 1 / 5;                        /* strekker seg over alle 4 kolonner */
-    grid-template-columns: repeat(3, 1fr);      /* 3 kort per rad */
+    grid-column: 1 / 5;                    /* strekker seg over alle fire kolonner */
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
+  /* tre kort per rad */
   }
-
-  /* Tjenester fyller hele bredden og viser 3 per rad */
-  #tjenester{
-    grid-column: 1 / 5;
-    grid-template-columns: repeat(3, 1fr);
-  }
-
- #tjenester>h2{
-    grid-column: 1/5;
-    text-align: center;
-    padding: 10px;
-
-
-  }
-
-  /*
-
-  footer>.generelt
-  }*/
-
-  /* Du kan enkelt plassere nye seksjoner med tall:
-     .noe { grid-column: 1 / 3; }  osv. */
+.cards>.card3{
+    display: contents;
 }
+  .card3{
+    grid-column: 2/4;
+  }
 
+
+  /* Tjenester over hele bredden, 3 kolonner internt */
+  #tjenester{
+    grid-column: 1 / 5;                    /* spenner over hele griden */
+    grid-template-columns: repeat(4,1fr); /* tre artikler per rad */
+  }
+  #tjenester > h2{
+    grid-column: 1 / 5;                    /* overskrift over alle kolonner */
+    text-align: center;                    /* midtstilt tittel */
+    padding: 10px;                         /* litt luft */
+  }
+
+  /* Footer-seksjoner i to kolonner på desktop */
+  .footer-grid{
+    grid-template-columns: repeat(2, 1fr); /* to kolonner */
+    justify-items: center;                 /* senterer hver kolonne */
+    text-align: left;                      /* bedre lesbarhet i brede visninger */
+  }
+  .footer-grid section{
+    max-width: 300px;                      /* smalere spalter for tekstflyt */
+  }
+}
