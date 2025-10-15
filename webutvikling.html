@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="nb">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>WEBUTVIKLING – Labøvelser</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  </head>
+
+  <body>
+    <!-- ===== HEADER (samme som yoga-layout) ===== -->
+    <header class="header">
+      <h3 class="logo">
+        <a href="index.html">
+          <i class="fa-solid fa-laptop-code" style="color:#2a3b33;"></i>
+          <span class="logo-text">WEBUTVIKLING</span>
+        </a>
+        <small class="tagline">Resultat fra gjennomførte labøvelser</small>
+      </h3>
+
+      <!-- burger/checkbox-hack -->
+      <input id="nav-toggle" type="checkbox" class="nav-toggle" aria-label="Åpne/lukk meny" />
+      <label for="nav-toggle" class="burger" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </label>
+
+      <nav class="nav" aria-label="Hovedmeny">
+        <ul>
+          <li><a href="index.html">Hjem</a></li>
+          <li><a href="nettsidemal.html">Nettside mal</a></li>
+          <li><a href="ovelse.html">Lab øvelser</a></li>
+          <li><a href="kontaktoss.html">Kontakt oss</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ===== HELTOPP / HERO (samme struktur som yoga) ===== -->
+    <section class="heltopp" id="heltopp">
+      <div class="beholder heltopp__innhold">
+        <p class="merkelapp">Lab • HTML & CSS</p>
+        <h1>Lab øvelse – WEBUTVIKLING</h1>
+        <p class="innledning">
+          Samleside for oppgaver, maler og ressurser i faget. Her finner du
+          studieplan, oversikt over labøvelser og kontaktpunkt.
+        </p>
+        <div class="heltopp__knapper">
+          <a class="knapp knapp--primar" href="ovelse.html">Se øvelser</a>
+          <a class="knapp knapp--sekundar" href="nettsidemal.html">Nettside-mal</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== KORTSEKSJON (tre hvite kort) ===== -->
+    <section class="kortseksjon" id="tjenester">
+      <div class="beholder grid-kort">
+        <!-- Kort 1 -->
+        <article class="kort">
+          <h3>Kontakt oss</h3>
+          <p>Har du spørsmål om øvelsene eller oppsettet? Ta kontakt så hjelper vi deg videre.</p>
+          <a href="kontaktoss.html" class="kort__lenke">Gå til kontaktsiden</a>
+        </article>
+
+        <!-- Kort 2 -->
+        <article class="kort">
+          <h3>Studieplan</h3>
+          <p>Se oppdaterte tider og planer for emnet Webutvikling.</p>
+          <a class="kort__lenke"
+             href="https://tp.educloud.no/hiof/timeplan/timeplan.php?id%5B%5D=ITF10511%2C1&type=course&sem=25h&campus=&hide_old=1"
+             target="_blank" rel="noopener">Åpne studieplan</a>
+        </article>
+
+        <!-- Kort 3 -->
+        <article class="kort">
+          <h3>Oversikt over labøvelser</h3>
+          <p>Tabell med alle øvelsene våre for første semester, med lenker til filer og beskrivelser.</p>
+          <a href="ovelse.html" class="kort__lenke">Se tabell-oversikt</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== INNHOLD + SIDEFELT ===== -->
+    <section class="innhold" id="blogg">
+      <div class="beholder innhold__grid">
+        <!-- Hovedartikkel / intro -->
+        <article>
+          <h2>Slik jobber vi i labene</h2>
+          <p>
+            I hver lab trener vi på en kjerneferdighet: struktur (HTML),
+            presentasjon (CSS) og interaksjon (litt tilgjengelig navigasjon).
+            Fokus er på <em>mobil først</em>, ryddig semantikk og gjenbrukbare
+            komponenter (knapper, kort, grid).
+          </p>
+
+          <h3>Hva bør du ha på plass?</h3>
+          <ul>
+            <li>Et grunnskjelett med <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> og <code>&lt;footer&gt;</code>.</li>
+            <li>En hero-seksjon med tydelig tittel, intro og knapper.</li>
+            <li>En kortseksjon i grid (2–3 kolonner på desktop).</li>
+            <li>Et sidefelt (sticky) for kontakt/ressurser.</li>
+          </ul>
+
+          <h3>Neste steg</h3>
+          <p>
+            Start med mal-siden, kopier komponentene du trenger og tilpass innholdet.
+            Hold klassene enkle og bruk variablene for farger/spacing.
+          </p>
+        </article>
+
+        <!-- Sidefelt med ressurslenker (sticky) -->
+        <aside class="sidefelt" id="kontakt">
+          <div class="sidefelt__boks">
+            <h3>Ressurser</h3>
+
+            <h4>HTML5 semantikk</h4>
+            <ul>
+              <li><a href="https://www.w3.org/TR/html52/semantics.html">HTML Semantics – W3C</a></li>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element">HTML-elementer – MDN</a></li>
+              <li><a href="https://www.freecodecamp.org/news/html5-semantic-elements/">Semantic elements – freeCodeCamp</a></li>
+              <li><a href="https://www.geeksforgeeks.org/semantic-html5-elements/">Semantic elements – GeeksforGeeks</a></li>
+              <li><a href="https://www.smashingmagazine.com/2018/05/semantic-html5-elements/">Smashing Magazine</a></li>
+            </ul>
+
+            <h4>HTML5 generelt</h4>
+            <ul>
+              <li><a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5">HTML5 Guide – MDN</a></li>
+              <li><a href="https://www.w3schools.com/html/html5_intro.asp">Intro – W3Schools</a></li>
+              <li><a href="https://html.spec.whatwg.org/multipage/">HTML Living Standard – WHATWG</a></li>
+              <li><a href="https://www.tutorialspoint.com/html5/index.htm">HTML5 Tutorial – TutorialsPoint</a></li>
+              <li><a href="https://www.geeksforgeeks.org/html5-introduction/">Intro – GeeksforGeeks</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+  <footer class="footer">
+  <div class="beholder">
+
+    <!-- Venstre: tittel + kontaktinfo -->
+    <div class="meta">
+      <h2>Kontakt</h2>
+      <p>Navn: Anna Førrisdahl</p>
+      <p>
+        E-post:
+        <a href="mailto:alforris@hiof.no">alforris@hiof.no</a>
+      </p>
+      <p>Emne: Webutvikling</p>
+    </div>
+
+    <!-- Høyre: skjema -->
+    <form action="#" method="post">
+      <label>
+        Navn:<br />
+        <input type="text" name="navn" required />
+      </label>
+
+      <label>
+        Emne:<br />
+        <input type="text" name="emne" required />
+      </label>
+
+      <label>
+        E-post:<br />
+        <input type="email" name="epost" required />
+      </label>
+
+      <label>
+        Melding:<br />
+        <textarea name="melding" rows="5" required></textarea>
+      </label>
+
+      <button type="submit" class="btn">Send</button>
+    </form>
+  </div>
+
+  <!-- Bunnlinje på tvers av hele bredden -->
+  <div class="beholder bunnlinje">
+    <p>© <span id="ar"></span> WEBUTVIKLING</p>
+    <nav>
+      <a href="kontaktoss.html">Kontakt</a> ·
+      <a href="nettsidemal.html">Mal</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('ar').textContent = new Date().getFullYear();
+</script>
+  </body>
+</html> 

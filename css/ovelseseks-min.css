@@ -308,6 +308,7 @@ footer a{
 footer a:hover{
   color: var(--primar);                    /* grønn hover */
   text-decoration: underline;              /* understrek ved hover */
+  -webkit-text-decoration-color: var(--primar);
   text-decoration-color: var(--primar);    /* matchende grønn strek */
   text-underline-offset: 3px;              /* litt luft til understrek */
 }
